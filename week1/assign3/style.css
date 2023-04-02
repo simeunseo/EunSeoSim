@@ -213,9 +213,16 @@ header {
   font-weight: bold;
 }
 
-#header__menu > h2 {
-  padding-bottom: 1rem;
+#header__menu > h3 {
+  padding-bottom: 1.5rem;
   cursor: pointer;
+}
+
+#header__menu > h3:hover {
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-color: var(--main-color);
+  text-underline-offset: 0.3rem;
 }
 
 /* nav */
@@ -324,4 +331,11 @@ img {
 
 .cards__card i:hover {
   color: var(--main-color);
+}
+
+.cards__card small {
+  width: 9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
 }
