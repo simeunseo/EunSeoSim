@@ -114,8 +114,8 @@ section {
 }
 body {
   line-height: 1;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
 }
 ol,
 ul {
@@ -198,8 +198,8 @@ header {
 }
 
 #header__menu {
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   height: 100vh;
   position: absolute;
   right: 0;
@@ -220,15 +220,17 @@ header {
 
 /* nav */
 main {
+  padding: 2rem;
   padding-top: 8rem;
-  display: flex;
+  display: grid;
+  grid-gap: 2rem;
+  grid-template-columns: 1fr 6fr;
 }
 
 nav {
-  background-color: black;
+  background-color: var(--main-color);
   color: white;
   padding: 2rem;
-  margin-left: 2rem;
   width: 10rem;
   height: fit-content;
   border-radius: 1rem;
@@ -248,7 +250,7 @@ nav li {
 }
 
 nav li:hover {
-  background-color: var(--main-color);
+  background-color: black;
   color: white;
 }
 
@@ -259,6 +261,60 @@ nav li:last-child {
   margin-bottom: 0;
 }
 
+/* cards */
 img {
-  width: 10rem;
+  width: 8rem;
+  height: 5rem;
+  object-fit: cover;
+}
+
+#cards ul {
+  display: grid;
+  grid-template-columns: repeat(5, 13rem);
+}
+
+@media screen and (max-width: 1330px) {
+  #cards ul {
+    grid-template-columns: repeat(4, 13rem);
+  }
+}
+
+@media screen and (max-width: 1120px) {
+  #cards ul {
+    grid-template-columns: repeat(3, 13rem);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  #cards ul {
+    grid-template-columns: repeat(2, 13rem);
+  }
+}
+
+@media screen and (max-width: 690px) {
+  #cards ul {
+    grid-template-columns: repeat(1, 13rem);
+  }
+  #cards {
+    justify-self: center;
+  }
+}
+
+.cards__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  border-radius: 1rem;
+  color: black;
+  padding: 2rem 1rem;
+  margin: 0.5rem;
+}
+
+.cards__card > * {
+  margin-bottom: 1rem;
+}
+
+.cards__card i {
+  margin-bottom: 0;
 }
