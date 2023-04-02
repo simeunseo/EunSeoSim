@@ -218,6 +218,47 @@ header {
   cursor: pointer;
 }
 
+/* nav */
+main {
+  padding-top: 8rem;
+  display: flex;
+}
+
+nav {
+  background-color: black;
+  color: white;
+  padding: 2rem;
+  margin-left: 2rem;
+  width: 10rem;
+  height: fit-content;
+  border-radius: 1rem;
+}
+
+nav h2 {
+  margin-bottom: 2rem;
+}
+
+nav li {
+  display: flex;
+  background-color: white;
+  color: var(--main-color);
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 1rem;
+}
+
+nav li:hover {
+  background-color: var(--main-color);
+  color: white;
+}
+
+nav h3 {
+  padding-left: 0.5rem;
+}
+nav li:last-child {
+  margin-bottom: 0;
+}
+
 img {
   width: 10rem;
 }
