@@ -1,4 +1,4 @@
-/* reset.css */
+/* basic setting */
 html,
 body,
 div,
@@ -114,6 +114,8 @@ section {
 }
 body {
   line-height: 1;
+  background-color: white;
+  color: black;
 }
 ol,
 ul {
@@ -135,17 +137,21 @@ table {
   border-spacing: 0;
 }
 
+:root {
+  --main-color: rgb(141, 19, 19); /* CSS 전역 변수 선언 */
+}
+
 /* font setting */
 @font-face {
-  font-family: "TAEBAEKmilkyway";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/TAEBAEKmilkyway.woff2")
-    format("woff2");
-  font-weight: normal;
+  font-family: "Pretendard-Regular";
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+  font-weight: 400;
   font-style: normal;
 }
 
 body {
-  font-family: "TAEBAEKmilkyway", sans-serif;
+  font-family: "Pretendard-Regular", sans-serif;
 }
 
 h1 {
@@ -159,4 +165,59 @@ h3 {
 }
 small {
   font-size: 0.5rem;
+}
+
+/* header */
+header {
+  padding: 2rem;
+  width: -webkit-fill-available;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  background-color: var(--main-color);
+  color: white;
+}
+
+#header__menu {
+  display: none;
+}
+
+#header__button {
+  width: 2rem;
+  height: 2rem;
+}
+
+#header__button i {
+  color: white;
+  font-size: 1.2rem;
+}
+
+#header__button:hover + #header__menu,
+#header__menu:hover {
+  display: block;
+}
+
+#header__menu {
+  background-color: black;
+  color: white;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 2rem;
+  width: 10rem;
+}
+
+#header__menu > h1 {
+  padding-bottom: 2rem;
+  font-weight: bold;
+}
+
+#header__menu > h2 {
+  padding-bottom: 1rem;
+  cursor: pointer;
+}
+
+img {
+  width: 10rem;
 }
