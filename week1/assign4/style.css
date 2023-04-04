@@ -74,7 +74,9 @@ body {
   justify-content: flex-start;
 }
 
-i {
+i,
+.calendar__todo-num,
+footer > div {
   cursor: pointer;
 }
 
@@ -236,7 +238,6 @@ footer > div {
   text-align: center;
   border: 1px solid var(--grey--color);
   border-radius: 1rem;
-  cursor: pointer;
   box-shadow: 0rem 0.7rem 0.1rem var(--grey--color);
 }
 
