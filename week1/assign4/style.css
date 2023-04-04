@@ -131,6 +131,7 @@ header {
   border-radius: 1rem;
   padding: 1rem;
   box-shadow: 0rem 0.7rem 0.1rem var(--grey--color);
+  color: var(--grey--color);
 }
 
 #calendar i {
@@ -223,6 +224,11 @@ header {
 .todo__categories__content i {
   font-size: 1.2rem;
   margin-right: 0.5rem;
+}
+
+.todo__categories__content i:hover,
+.todo__categories__content i:focus {
+  color: black;
 }
 
 /* footer */
