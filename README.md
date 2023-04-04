@@ -10,8 +10,8 @@
 
 | 주차  | 과제명 |
 | ----- | ---- | 
-| 1주차 | 웨비들의 냠냠 🍰 창업🏠 |
-|  | WEB 💛 TO DO MATE | 
+| 1주차 | [웨비들의 냠냠 🍰 창업🏠](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/1) |
+|  | [WEB 💛 TO DO MATE](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/2) | 
 |  | 💡 생각과제 |
 
 </div>
