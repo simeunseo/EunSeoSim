@@ -67,7 +67,7 @@ html {
 body {
   background-color: white;
   width: 480px;
-  height: 100vh;
+  height: 100%;
   padding: 2rem;
   display: flex;
   flex-direction: column;
