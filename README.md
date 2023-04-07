@@ -8,10 +8,10 @@
 
 ### 🥸 과제
 
-| 주차  | 과제명 |
-| ----- | ---- | 
-| 1주차 | [웨비들의 냠냠 🍰 창업🏠](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/1) |
-|  | [WEB 💛 TO DO MATE](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/2) | 
-|  | [💡 생각과제](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/3) |
+| 주차  | 과제명 | 구현페이지 |
+| ----- | ---- | --- |
+| 1주차 | [웨비들의 냠냠 🍰 창업🏠](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/1) | [🔗](https://simeunseo.github.io/sopt32/week1/assign3/index.html) |
+|  | [WEB 💛 TO DO MATE](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/2) | [🔗](https://simeunseo.github.io/sopt32/week1/assign4/index.html) |
+|  | [💡 생각과제](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/3) | |
 
 </div>
