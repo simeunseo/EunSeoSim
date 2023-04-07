@@ -344,9 +344,14 @@ img {
   color: var(--main-color);
 }
 
-.cards__card small {
+.cards__card__tags {
   width: 9rem;
-  white-space: nowrap;
+  height: 1rem;
   overflow: hidden;
+  word-break: keep-all;
   text-align: center;
+}
+
+.cards__card__tags > small::before {
+  content: "#";
 }
