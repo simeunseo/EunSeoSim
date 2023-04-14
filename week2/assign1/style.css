@@ -1,5 +1,10 @@
 @import url("./reset.css");
 
+/* CSS 전역 변수 선언 */
+:root {
+  --main-color: rgb(141, 19, 19);
+}
+
 /* font setting */
 @font-face {
   font-family: "Pretendard-Regular";
@@ -29,7 +34,8 @@ h2 {
   font-family: EBSHunminjeongeumSBA;
   font-size: 1.8rem;
 }
-h3 {
+h3,
+nav > a {
   font-size: 1.3rem;
 }
 small {
@@ -83,12 +89,18 @@ header {
   font-weight: bold;
 }
 
-#header__menu > h3 {
+#header__menu__list {
+  display: flex;
+  flex-direction: column;
+}
+
+#header__menu a {
+  color: black;
   padding-bottom: 1.5rem;
   cursor: pointer;
 }
 
-#header__menu > h3:hover {
+#header__menu a:hover {
   text-decoration-line: underline;
   text-decoration-style: wavy;
   text-decoration-color: var(--main-color);
@@ -104,7 +116,7 @@ main {
   grid-template-columns: 1fr 6fr;
 }
 
-nav {
+main > nav {
   background-color: var(--main-color);
   color: white;
   padding: 2rem;
