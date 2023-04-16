@@ -157,31 +157,31 @@ img {
   object-fit: cover;
 }
 
-#cards ul {
+#cards {
   display: grid;
   grid-template-columns: repeat(5, 13rem);
 }
 
 @media screen and (max-width: 1330px) {
-  #cards ul {
+  #cards {
     grid-template-columns: repeat(4, 13rem);
   }
 }
 
 @media screen and (max-width: 1120px) {
-  #cards ul {
+  #cards {
     grid-template-columns: repeat(3, 13rem);
   }
 }
 
 @media screen and (max-width: 900px) {
-  #cards ul {
+  #cards {
     grid-template-columns: repeat(2, 13rem);
   }
 }
 
 @media screen and (max-width: 690px) {
-  #cards ul {
+  #cards {
     grid-template-columns: repeat(1, 13rem);
   }
   #cards {
