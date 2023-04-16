@@ -9,17 +9,19 @@
       src="https://kit.fontawesome.com/6fbcf91afd.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./style/style.css" />
   </head>
   <body>
     <header>
       <h1>은서네 마라마라탕 🥬🍄🍡</h1>
-      <button type="button" id="header__button"><i class="fa-solid fa-bars"></i></button>
+      <button type="button" id="header__button">
+        <i class="fa-solid fa-bars"></i>
+      </button>
       <nav id="header__menu">
         <h1>메뉴</h1>
         <div id="header__menu__list">
-            <a href="/">새 상품 추가</a>
-            <a href="/">찜 목록</a>
+          <a href="./addCard">새 상품 추가</a>
+          <a href="#">찜 목록</a>
         </div>
       </nav>
     </header>
@@ -38,6 +40,10 @@
           <li>
             <input type="checkbox" />
             <h3>버섯</h3>
+          </li>
+          <li>
+            <input type="checkbox" />
+            <h3>두부</h3>
           </li>
           <li>
             <input type="checkbox" />
@@ -171,5 +177,6 @@
         </ul>
       </section>
     </main>
+    <script type="module" src="./script.js"></script>
   </body>
 </html>
