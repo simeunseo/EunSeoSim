@@ -2,7 +2,7 @@ const ITEM_LIST = [
   {
     category: "채소",
     name: "청경채",
-    tags: ["푸릇푸릇", "신선", "맛있어", "아삭아삭"],
+    tags: ["푸릇푸릇", "아삭아삭", "맛있어", "신선해"],
     img: "https://img-cf.kurly.com/shop/data/goods/1619680685239l0.jpg",
   },
   {
