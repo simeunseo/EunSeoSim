@@ -139,20 +139,23 @@ main {
   padding: 3rem;
   margin: 3rem 6rem;
 
-  width: max-content;
-
   border-radius: 1rem;
 }
 
 form {
-  width: 30vw;
+  width: 35vw;
 }
 
 form > span {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
   width: 100%;
-  margin-bottom: 2rem;
+}
+
+span > label {
+  margin-right: 1rem;
 }
 
 form input[type="file"] {
@@ -166,9 +169,33 @@ form > button {
   border-radius: 1rem;
 
   padding: 1rem 0;
+  margin-top: 2rem;
+
   width: 100%;
+}
+
+form > button > h2 {
+  font-size: 1.3rem;
 }
 
 form > button:hover {
   background-color: black;
+}
+
+form > hr {
+  margin: 1rem 0;
+  border: 0.01rem solid var(--shadow-color);
+}
+
+#image-thumbnail {
+  width: 14rem;
+  height: 7rem;
+  object-fit: cover;
+}
+
+input,
+select {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid var(--shadow-color);
 }
