@@ -9,9 +9,9 @@ const CATEGORY_NAME = {
   "check-etc": "기타",
 };
 
-/*
+/*************
 nav 체크박스 필터링
-*/
+**************/
 
 let curItemList = []; //화면에 보여줄 아이템 리스트를 저장하는 변수
 
@@ -26,7 +26,7 @@ checkBoxList.forEach((item) => {
       curItemList
     );
     listToCard(curItemList); //반환된 list를 Card 노드로 만들어 화면에 보여준다.
-    makeCategoryTag(item);
+    makeCategoryTag(item); //변화가 감지된 checkBox에 대해 카테고리 태그 생성 또는 삭제
   });
 });
 
@@ -63,20 +63,20 @@ function removeByCategoryName(list, categoryName) {
   return list;
 }
 
-/*
+/*************
 필터링된 데이터 기반으로 화면에 보여주기
-*/
+**************/
 
-//아이템 목록을 탐색하면서 아이템 하나씩 템플릿을 복사하여 card 노드로 만드는 함수
+const cardsSection = document.getElementById("cards"); //card들이 들어갈 부모노드
+const cardTemplate = document.getElementById("cards__template"); //card 템플릿
+
+//list를 탐색하면서 요소를 하나씩 card 노드로 만드는 함수
 function listToCard(list) {
-  const cardsSection = document.getElementById("cards"); //card들이 들어갈 부모노드
-  const cardTemplate = document.getElementById("cards__template"); //card 템플릿
-
   cardsSection.replaceChildren();
-  list.map((item, idx) => {
+  list.forEach((item) => {
     //tag들 또한 리스트이므로 그 안에서 map을 돌린다.
     let tags = ``;
-    item.tags.map((tag, idx) => {
+    item.tags.forEach((tag) => {
       tags += `<small>` + tag + `</small>\n`;
     });
 
@@ -93,12 +93,14 @@ function listToCard(list) {
   });
 }
 
-/*
-카테고리 태그
-*/
+/*************
+카테고리 태그 관리
+**************/
+
 const categoryTagSection = document.getElementById("category-tags__box"); //카테고리 태그들이 들어갈 부모노드
 const categoryTagTemplate = document.getElementById("category-tags__template"); //card 템플릿
 
+//checkBox의 checked 상태에 따라 카테고리 태그를 생성하거나 삭제하는 함수
 function makeCategoryTag(checkBox) {
   if (checkBox.checked) {
     let content = categoryTagTemplate.cloneNode(true); //템플릿 복사
