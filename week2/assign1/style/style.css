@@ -145,6 +145,7 @@ nav li:hover {
 
 nav label {
   padding-left: 0.5rem;
+  cursor: pointer;
 }
 nav li:last-child {
   margin-bottom: 0;
@@ -244,8 +245,15 @@ img {
 
 #category-tags__box label {
   margin-left: 0.5rem;
+
   color: white;
   font-size: 1.2rem;
+
+  cursor: pointer;
+}
+
+#category-tags__box label:hover {
+  color: black;
 }
 
 .category-tag {
