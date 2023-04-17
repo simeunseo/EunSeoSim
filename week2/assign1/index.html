@@ -59,7 +59,10 @@
           </li>
         </ul>
       </nav>
-      <section id="cards"></section>
+      <div class="container">
+        <section id="category-tag__box"></section>
+        <section id="cards"></section>
+      </div>
     </main>
     <template id="cards__template">
       <article class="cards__card">
@@ -68,6 +71,12 @@
         <img alt="{img_alt}" src="{img_src}" />
         <i class="fa-solid fa-heart"></i>
       </article>
+    </template>
+    <template id="category-tags__template">
+      <span class="category-tag"
+        >전체<button type="button">
+          <i class="fa-solid fa-circle-xmark"></i></button
+      ></span>
     </template>
     <script defer type="module" src="./script.js"></script>
   </body>
