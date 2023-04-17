@@ -14,16 +14,16 @@ const CATEGORY_NAME = {
   "check-etc": "기타",
 };
 
-let curItemList = [];
+let curItemList = []; //화면에 보여줄 아이템 리스트를 저장하는 변수
 
 const checkBox = document.getElementsByClassName("main__nav__checkbox"); //checkbox에 해당하는 HTMLCollection
 const checkBoxList = [...checkBox]; //HTMLCollection to Array
-checkBoxList.map((checkBoxItem, idx) => {
+checkBoxList.forEach((checkBoxItem) => {
   //checkbox의 변화를 감지
   checkBoxItem.addEventListener("change", () => {
     curItemList = handleCheckBox(
-      checkBoxItem.checked,
-      CATEGORY_NAME[checkBoxItem.id],
+      checkBoxItem.checked, //감지된 변화가 체크인가, 체크해제인가
+      CATEGORY_NAME[checkBoxItem.id], //변화가 감지된 checkBox의 카테고리명
       curItemList
     );
     listToCard(curItemList);
@@ -32,11 +32,17 @@ checkBoxList.map((checkBoxItem, idx) => {
 
 //체크박스 체크와 해제(isChecked)에 따라 해당하는 카테고리(categoryName)에 속하는 아이템 목록을 list에 추가하거나 삭제하는 함수
 function handleCheckBox(isChecked, categoryName, list) {
+  if (categoryName === "전체") {
+    let diff = [];
+    isChecked
+      ? ((list = [...ITEM_LIST]), (list = Array.from(new Set(list))))
+      : list.splice(0);
+  }
   ITEM_LIST.forEach((item) => {
     if (item.category === categoryName) {
       isChecked
-        ? (list.push(item), (list = Array.from(new Set(list))))
-        : list.splice(findIdxByCategory(list, item.category), 1);
+        ? (list.push(item), (list = Array.from(new Set(list)))) //check 됐다면 list에 해당 카테고리의 아이템 추가
+        : list.splice(findIdxByCategory(list, item.category), 1); //check 해제 됐다면 list에서 해당 카테고리의 아이템 삭제
     }
   });
   return list;
