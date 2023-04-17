@@ -22,6 +22,7 @@ window.onload = () => {
   curItemList = ITEM_LIST;
   listToCard(curItemList);
   makeCategoryTag(checkBoxAll);
+  generateModal();
 };
 
 const checkBox = document.getElementsByClassName("main__nav__checkbox"); //checkbox에 해당하는 HTMLCollection
@@ -152,6 +153,15 @@ function generateModal() {
       //클릭된 +버튼에 해당하는 modal 잡아오기
       const modal = item.parentNode.parentNode;
       modal.style.display = "none";
+    });
+  });
+
+  //overlay 영역 클릭시 모달 close
+  const tagOverlay = document.getElementsByClassName("cards__card__modal");
+  const tagOverlayList = [...tagOverlay];
+  tagOverlayList.forEach((item) => {
+    item.addEventListener("click", () => {
+      item.style.display = "none";
     });
   });
 }
