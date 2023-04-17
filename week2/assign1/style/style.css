@@ -184,7 +184,7 @@ img {
   #cards {
     grid-template-columns: repeat(1, 13rem);
   }
-  #cards {
+  .container {
     justify-self: center;
   }
 }
@@ -226,4 +226,29 @@ img {
 
 .cards__card__tags > small::before {
   content: "#";
+}
+
+/* category tag */
+#category-tag__box {
+  display: flex;
+  margin-bottom: 0.5rem;
+}
+
+#category-tag__box > span {
+  padding: 1rem;
+  margin: 0.5rem;
+
+  background: var(--main-color);
+  border-radius: 1rem;
+}
+
+#category-tag__box button {
+  margin-left: 0.5rem;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.category-tag {
+  display: flex;
+  align-items: center;
 }
