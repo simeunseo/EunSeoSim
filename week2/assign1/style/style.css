@@ -143,7 +143,7 @@ nav li:hover {
   color: white;
 }
 
-nav h3 {
+nav label {
   padding-left: 0.5rem;
 }
 nav li:last-child {
