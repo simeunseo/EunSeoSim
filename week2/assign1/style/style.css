@@ -3,6 +3,7 @@
 /* CSS 전역 변수 선언 */
 :root {
   --main-color: rgb(141, 19, 19);
+  --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
 /* font setting */
@@ -46,16 +47,20 @@ small {
 header {
   padding: 2rem;
   width: -webkit-fill-available;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: fixed;
+  z-index: 2;
+
   background-color: var(--main-color);
   color: white;
 }
 
 #header__menu {
   display: none;
+  box-shadow: -1rem 0 1rem var(--shadow-color);
 }
 
 #header__button {
@@ -271,7 +276,7 @@ img {
   justify-content: center;
   align-items: center;
   position: absolute;
-  background: rgb(0 0 0 / 40%);
+  background: var(--shadow-color);
   z-index: 1;
 
   text-align: center;
