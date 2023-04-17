@@ -67,11 +67,17 @@
     <template id="cards__template">
       <article class="cards__card">
         <div class="cards__card__modal">
-          <div class="cards__card__modal__tags">{modal_tags}</div>
+          <div class="cards__card__modal__tags">
+            <button type="button">
+              <i class="fa-solid fa-x"></i></button
+            >{modal_tags}
+          </div>
         </div>
         <h3>{item_name}</h3>
-        <div class="cards__card__tags">{tags}</div>
-        <button type="button"><i class="fa-solid fa-circle-plus"></i></button>
+        <div class="cards__card__tags__container">
+          <div class="cards__card__tags">{tags}</div>
+          <button type="button"><i class="fa-solid fa-circle-plus"></i></button>
+        </div>
         <img alt="{img_alt}" src="{img_src}" />
         <i class="fa-solid fa-heart"></i>
       </article>
