@@ -20,13 +20,22 @@ let dspItemList = [];
 const checkBox = document.getElementsByClassName("main__nav__checkbox"); //checkbox에 해당하는 HTMLCollection
 const checkBoxList = [...checkBox]; //HTMLCollection to Array
 checkBoxList.map((checkBoxItem, idx) => {
+  //checkbox의 변화를 감지
   checkBoxItem.addEventListener("change", () => {
-    //checkbox의 변화를 감지
     if (checkBoxItem.checked) {
       ITEM_LIST.forEach((item) => {
         if (item.category === DSP_CAT_NAME[checkBoxItem.id]) {
           dspItemList.push(item);
           dspItemList = Array.from(new Set(dspItemList));
+        }
+      });
+    } else {
+      ITEM_LIST.forEach((item) => {
+        if (item.category === DSP_CAT_NAME[checkBoxItem.id]) {
+          dspItemList.splice(
+            dspItemList.findIndex((i) => i.category === item.category),
+            1
+          );
         }
       });
     }
