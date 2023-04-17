@@ -137,7 +137,7 @@ main {
   align-items: center;
 
   padding: 3rem;
-  margin: 3rem 6rem;
+  margin: 2rem 6rem;
 
   border-radius: 1rem;
 }
@@ -189,8 +189,6 @@ form > hr {
 
 #image-thumbnail {
   width: 14rem;
-  height: 7rem;
-  object-fit: cover;
 }
 
 input,
