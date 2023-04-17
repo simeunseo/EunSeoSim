@@ -327,4 +327,5 @@ img {
 
 .cards__card__modal {
   display: none;
+  cursor: pointer;
 }
