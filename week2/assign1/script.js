@@ -15,12 +15,13 @@ nav 체크박스 필터링
 
 let curItemList = []; //화면에 보여줄 아이템 리스트를 저장하는 변수
 
+const checkBoxAll = document.getElementById("check-all");
 //브라우저를 처음 실행할 때 전체 카테고리가 디폴트로 선택
 window.onload = () => {
   document.getElementById("check-all").checked = true;
   curItemList = ITEM_LIST;
   listToCard(curItemList);
-  makeCategoryTag(checkBoxList.filter((item) => item.id === "check-all")[0]);
+  makeCategoryTag(checkBoxAll);
 };
 
 const checkBox = document.getElementsByClassName("main__nav__checkbox"); //checkbox에 해당하는 HTMLCollection
@@ -61,7 +62,7 @@ function handleCheckBox(isChecked, categoryName, list) {
             (list.push(item), (list = Array.from(new Set(list))));
         })
       : //카테고리 선택 해제 시, 'check-all' 체크박스가 선택이 안되어있는 상태라면
-        !checkBoxList.filter((item) => item.id === "check-all")[0].checked && //해당 카테고리에 속하는 item들을 list에서 제거
+        checkBoxAll.checked || //해당 카테고리에 속하는 item들을 list에서 제거
         (list = removeByCategoryName(list, categoryName));
   }
   return list;
