@@ -14,12 +14,18 @@ nav 체크박스 필터링
 **************/
 
 let curItemList = []; //화면에 보여줄 아이템 리스트를 저장하는 변수
+let newItemList = []; //localStorage에 저장된 값을 가져오는 변수
 
 const checkBoxAll = document.getElementById("check-all");
 //브라우저를 처음 실행할 때 전체 카테고리가 디폴트로 선택
 window.onload = () => {
-  document.getElementById("check-all").checked = true;
-  curItemList = ITEM_LIST;
+  localStorage.getItem("item_data") === null &&
+    localStorage.setItem("item_data", JSON.stringify(ITEM_LIST)); //localStorage에 아이템 목록 저장
+  newItemList = JSON.parse(localStorage.getItem("item_data")); //localStorage에 저장된 목록을 가져옴
+
+  document.getElementById("check-all").checked = true; //전체 카테고리는 디폴트로 체크
+
+  curItemList = newItemList;
   listToCard(curItemList);
   makeCategoryTag(checkBoxAll);
   generateModal();
@@ -47,7 +53,7 @@ checkBoxList.forEach((item) => {
 function handleCheckBox(isChecked, categoryName, list) {
   if (categoryName === "전체") {
     isChecked //전체 카테고리 선택 시
-      ? ITEM_LIST.forEach((item) => {
+      ? newItemList.forEach((item) => {
           //list에 ITEM_LIST의 모든 항목을 넣음
           list.push(item);
           list = Array.from(new Set(list));
@@ -59,7 +65,7 @@ function handleCheckBox(isChecked, categoryName, list) {
         });
   } else {
     isChecked //전체가 아닌 다른 카테고리 선택 시
-      ? ITEM_LIST.forEach((item) => {
+      ? newItemList.forEach((item) => {
           item.category === categoryName && //해당 카테고리에 속하는 item들을 list에 넣음
             (list.push(item), (list = Array.from(new Set(list))));
         })
