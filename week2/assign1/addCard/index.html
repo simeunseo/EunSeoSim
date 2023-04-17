@@ -25,7 +25,6 @@
     <main>
       <section class="heading">
         <h1>당신이 원하는 그 어떤 것도</h1>
-        <br />
         <h1>마라탕의 재료가 될 수 있습니다.</h1>
       </section>
       <section class="form-container">
@@ -34,6 +33,7 @@
             <label for="name"><h4>재료 이름</h4></label>
             <input required type="text" name="name" id="name" />
           </span>
+          <hr />
           <span>
             <label for="hashtag"><h4>해시태그</h4></label>
             <input
@@ -44,21 +44,28 @@
               id="hashtag"
             />
           </span>
+          <hr />
           <span>
             <div class="button">
-              <label for="chooseFile"><h4>이미지 선택</h4></label>
+              <label for="image"><h4>이미지 선택</h4></label>
             </div>
             <input
               required
               type="file"
-              id="chooseFile"
-              name="chooseFile"
+              id="image"
+              name="image"
               accept="image/*"
             />
           </span>
+          <hr />
           <span>
             <label><h4>이미지 미리보기</h4></label>
+            <img
+              src="https://skg1891.cafe24.com/wp-content/uploads/2013/11/dummy-image-portrait.jpg"
+              id="image-thumbnail"
+            />
           </span>
+          <hr />
           <span>
             <label for="cateogry"><h4>카테고리</h4></label>
             <select required name="category">
@@ -69,7 +76,7 @@
               <option value="etc">기타</option>
             </select>
           </span>
-          <button type="submit"><h4>재료 추가</h4></button>
+          <button type="submit"><h2>재료 추가</h2></button>
         </form>
       </section>
     </main>
