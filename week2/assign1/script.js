@@ -85,6 +85,7 @@ function listToCard(list) {
     newHtml = newHtml //복사한 html에서 필요한 부분을 item 내용에 맞게 변경
       .replace("{item_name}", item.name)
       .replace("{tags}", tags)
+      .replace("{modal_tags}", tags)
       .replace("{img_alt}", item.name)
       .replace("{img_src}", item.img);
 
