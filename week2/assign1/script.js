@@ -38,6 +38,7 @@ checkBoxList.forEach((item) => {
 
     listToCard(curItemList); //반환된 list를 Card 노드로 만들어 화면에 보여준다.
     makeCategoryTag(item); //변화가 감지된 checkBox에 대해 카테고리 태그 생성 또는 삭제
+    generateModal();
   });
 });
 
@@ -127,4 +128,30 @@ function makeCategoryTag(checkBox) {
     const target = document.getElementById("tag__" + checkBox.id);
     target.remove();
   }
+}
+
+/*************
+해시태그 모달 관리
+**************/
+
+function generateModal() {
+  const tagPlusBtn = document.getElementsByClassName("tags__plus-btn");
+  const tagPlusBtnList = [...tagPlusBtn];
+  tagPlusBtnList.forEach((item) => {
+    item.addEventListener("click", () => {
+      //클릭된 +버튼에 해당하는 modal 잡아오기
+      const modal = item.parentNode.parentNode.firstElementChild;
+      modal.style.display = "flex";
+    });
+  });
+
+  const tagCloseBtn = document.getElementsByClassName("tag__close-btn");
+  const tagCloseBtnList = [...tagCloseBtn];
+  tagCloseBtnList.forEach((item) => {
+    item.addEventListener("click", () => {
+      //클릭된 +버튼에 해당하는 modal 잡아오기
+      const modal = item.parentNode.parentNode;
+      modal.style.display = "none";
+    });
+  });
 }

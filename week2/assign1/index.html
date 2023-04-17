@@ -68,7 +68,7 @@
       <article class="cards__card">
         <div class="cards__card__modal">
           <div class="cards__card__modal__tags">
-            <button type="button">
+            <button class="tag__close-btn" type="button">
               <i class="fa-solid fa-x"></i></button
             >{modal_tags}
           </div>
@@ -76,7 +76,9 @@
         <h3>{item_name}</h3>
         <div class="cards__card__tags__container">
           <div class="cards__card__tags">{tags}</div>
-          <button type="button"><i class="fa-solid fa-circle-plus"></i></button>
+          <button class="tags__plus-btn" type="button">
+            <i class="fa-solid fa-circle-plus"></i>
+          </button>
         </div>
         <img alt="{img_alt}" src="{img_src}" />
         <i class="fa-solid fa-heart"></i>
