@@ -229,12 +229,12 @@ img {
 }
 
 /* category tag */
-#category-tag__box {
+#category-tags__box {
   display: flex;
   margin-bottom: 0.5rem;
 }
 
-#category-tag__box > span {
+#category-tags__box > span {
   padding: 1rem;
   margin: 0.5rem;
 
@@ -242,7 +242,7 @@ img {
   border-radius: 1rem;
 }
 
-#category-tag__box button {
+#category-tags__box label {
   margin-left: 0.5rem;
   color: white;
   font-size: 1.2rem;
