@@ -26,6 +26,7 @@ checkBoxList.forEach((item) => {
       curItemList
     );
     listToCard(curItemList); //반환된 list를 Card 노드로 만들어 화면에 보여준다.
+    makeCategoryTag(item);
   });
 });
 
@@ -65,11 +66,12 @@ function removeByCategoryName(list, categoryName) {
 /*
 필터링된 데이터 기반으로 화면에 보여주기
 */
-const cardsSection = document.getElementById("cards"); //card들이 들어갈 부모노드
-const cardTemplate = document.getElementById("cards__template"); //card 템플릿
 
 //아이템 목록을 탐색하면서 아이템 하나씩 템플릿을 복사하여 card 노드로 만드는 함수
 function listToCard(list) {
+  const cardsSection = document.getElementById("cards"); //card들이 들어갈 부모노드
+  const cardTemplate = document.getElementById("cards__template"); //card 템플릿
+
   cardsSection.replaceChildren();
   list.map((item, idx) => {
     //tag들 또한 리스트이므로 그 안에서 map을 돌린다.
@@ -89,4 +91,26 @@ function listToCard(list) {
     content.innerHTML = newHtml; //새롭게 바뀐 html을 템플릿에 적용
     cardsSection.appendChild(content.content); //부모노드 안에 넣기
   });
+}
+
+/*
+카테고리 태그
+*/
+const categoryTagSection = document.getElementById("category-tags__box"); //카테고리 태그들이 들어갈 부모노드
+const categoryTagTemplate = document.getElementById("category-tags__template"); //card 템플릿
+
+function makeCategoryTag(checkBox) {
+  if (checkBox.checked) {
+    let content = categoryTagTemplate.cloneNode(true); //템플릿 복사
+    let newHtml = content.innerHTML; //템플릿 안의 html 복사
+    newHtml = newHtml
+      .replace("{category_name}", CATEGORY_NAME[checkBox.id])
+      .replace("{checkbox_id}", checkBox.id)
+      .replace("{category-tag_id}", "tag__" + checkBox.id);
+    content.innerHTML = newHtml;
+    categoryTagSection.appendChild(content.content);
+  } else {
+    const target = document.getElementById("tag__" + checkBox.id);
+    target.remove();
+  }
 }
