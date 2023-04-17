@@ -133,9 +133,10 @@ nav li {
   display: flex;
   background-color: white;
   color: var(--main-color);
-  padding: 1rem;
+
+  padding: 0.7rem;
   margin-bottom: 1rem;
-  border-radius: 1rem;
+  border-radius: 0.8rem;
 }
 
 nav li:hover {
@@ -146,6 +147,7 @@ nav li:hover {
 nav label {
   padding-left: 0.5rem;
   cursor: pointer;
+  width: 100%;
 }
 nav li:last-child {
   margin-bottom: 0;
