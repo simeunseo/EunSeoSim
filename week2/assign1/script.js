@@ -15,8 +15,17 @@ nav 체크박스 필터링
 
 let curItemList = []; //화면에 보여줄 아이템 리스트를 저장하는 변수
 
+//브라우저를 처음 실행할 때 전체 카테고리가 디폴트로 선택
+window.onload = () => {
+  document.getElementById("check-all").checked = true;
+  curItemList = ITEM_LIST;
+  listToCard(curItemList);
+  makeCategoryTag(checkBoxList.filter((item) => item.id === "check-all")[0]);
+};
+
 const checkBox = document.getElementsByClassName("main__nav__checkbox"); //checkbox에 해당하는 HTMLCollection
 const checkBoxList = [...checkBox]; //HTMLCollection to Array
+
 checkBoxList.forEach((item) => {
   //checkbox의 변화를 감지
   item.addEventListener("change", () => {
@@ -25,6 +34,7 @@ checkBoxList.forEach((item) => {
       CATEGORY_NAME[item.id], //변화가 감지된 checkBox의 카테고리명
       curItemList
     );
+
     listToCard(curItemList); //반환된 list를 Card 노드로 만들어 화면에 보여준다.
     makeCategoryTag(item); //변화가 감지된 checkBox에 대해 카테고리 태그 생성 또는 삭제
   });
