@@ -6,8 +6,7 @@ const cardTemplate = document.getElementById("cards__template"); //card 템플�
 /*
 nav 체크박스 필터링
 */
-const DSP_CAT_NAME = {
-  //DISPLAY_CATEGORY_NAME의 약어
+const CATEGORY_NAME = {
   "check-all": "전체",
   "check-veg": "채소",
   "check-mush": "버섯",
@@ -15,39 +14,45 @@ const DSP_CAT_NAME = {
   "check-etc": "기타",
 };
 
-let dspItemList = [];
+let curItemList = [];
 
 const checkBox = document.getElementsByClassName("main__nav__checkbox"); //checkbox에 해당하는 HTMLCollection
 const checkBoxList = [...checkBox]; //HTMLCollection to Array
 checkBoxList.map((checkBoxItem, idx) => {
   //checkbox의 변화를 감지
   checkBoxItem.addEventListener("change", () => {
-    if (checkBoxItem.checked) {
-      ITEM_LIST.forEach((item) => {
-        if (item.category === DSP_CAT_NAME[checkBoxItem.id]) {
-          dspItemList.push(item);
-          dspItemList = Array.from(new Set(dspItemList));
-        }
-      });
-    } else {
-      ITEM_LIST.forEach((item) => {
-        if (item.category === DSP_CAT_NAME[checkBoxItem.id]) {
-          dspItemList.splice(
-            dspItemList.findIndex((i) => i.category === item.category),
-            1
-          );
-        }
-      });
-    }
-    listToCard(dspItemList);
+    curItemList = handleCheckBox(
+      checkBoxItem.checked,
+      CATEGORY_NAME[checkBoxItem.id],
+      curItemList
+    );
+    listToCard(curItemList);
   });
 });
+
+//체크박스 체크와 해제(isChecked)에 따라 해당하는 카테고리(categoryName)에 속하는 아이템 목록을 list에 추가하거나 삭제하는 함수
+function handleCheckBox(isChecked, categoryName, list) {
+  ITEM_LIST.forEach((item) => {
+    if (item.category === categoryName) {
+      isChecked
+        ? (list.push(item), (list = Array.from(new Set(list))))
+        : list.splice(findIdxByCategory(list, item.category), 1);
+    }
+  });
+  return list;
+}
+
+//list에서 카테고리명이 categoryName인 아이템의 인덱스를 반환하는 함수
+function findIdxByCategory(list, categoryName) {
+  let idx = list.findIndex((item) => item.category === categoryName);
+  return idx;
+}
 
 /*
 필터링된 데이터 기반으로 화면에 보여주기
 */
 
-//ITEM_LIST를 탐색하면서 아이템 하나씩 템플릿을 복사하여 card 노드로 만든다.
+//아이템 목록을 탐색하면서 아이템 하나씩 템플릿을 복사하여 card 노드로 만드는 함수
 function listToCard(list) {
   cardsSection.replaceChildren();
   list.map((item, idx) => {
