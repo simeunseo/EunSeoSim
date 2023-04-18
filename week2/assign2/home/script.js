@@ -108,12 +108,19 @@ function checkModal() {
         const selectedCategory = item.previousElementSibling.innerText;
 
         let localStorageData = JSON.parse(localStorage.getItem("todo_data"));
-        localStorageData
-          .find((item) => item.category === selectedCategory)
-          .list.push({
-            content: content,
-            done: false,
-          });
+        let contentList = localStorageData.find(
+          (item) => item.category === selectedCategory
+        ).list;
+        let isExist = false;
+        contentList.forEach((item) => {
+          item.content === content && (isExist = true);
+        });
+        isExist
+          ? alert("이미 등록된 항목입니다.")
+          : contentList.push({
+              content: content,
+              done: false,
+            });
         localStorage.setItem("todo_data", JSON.stringify(localStorageData));
         todoCounting++;
         modal.style.display = "none";
