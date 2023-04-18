@@ -10,9 +10,9 @@ window.onload = () => {
     localStorage.setItem("todo_data", JSON.stringify(TODO_DATA)); //localStorage 초기화
   todoData = JSON.parse(localStorage.getItem("todo_data")); //localStorage에 저장된 목록을 가져옴
   listToTodo(todoData);
-  todoCount();
   checkDone();
   checkModal();
+  todoCount();
 };
 
 //할일 클릭을 감지하여 처리하는 함수
@@ -32,13 +32,13 @@ function checkDone() {
         //사실 item 전부 반복문 돌려서 찾으면 가독성은 더 좋은데, 반복문을 피하려고 하다보니 이렇게 긴 탐색의 과정이 필요했습니다...
         localStorageData
           .find((item) => item.category === changedCategory)
-          .list.find((item) => item.content === changedTodo).done = "false";
+          .list.find((item) => item.content === changedTodo).done = false;
         item.attributes.done.value = "false";
         todoCounting++;
       } else {
         localStorageData
           .find((item) => item.category === changedCategory)
-          .list.find((item) => item.content === changedTodo).done = "true";
+          .list.find((item) => item.content === changedTodo).done = true;
         item.attributes.done.value = "true";
         todoCounting--;
       }
@@ -79,7 +79,7 @@ function listToTodoList(list, categoryName) {
   const todoListTemplate = document.getElementById("todo__list__template"); //todo list(한 카테고리의 투두 목록들) 템플릿
   let finalHtml = "";
   list.forEach((item) => {
-    item.done === "false" && todoCounting++;
+    item.done === false && todoCounting++;
     let todoListContent = todoListTemplate.cloneNode(true);
     let todoListNewHtml = todoListContent.innerHTML;
     todoListNewHtml = todoListNewHtml
@@ -93,12 +93,31 @@ function listToTodoList(list, categoryName) {
 }
 
 function checkModal() {
+  const input = document.getElementById("add-todo__content");
   const modal = document.getElementById("add-todo__modal");
   const addBtn = document.getElementsByClassName("add-btn");
   const addBtnList = [...addBtn];
   addBtnList.forEach((item) => {
     item.addEventListener("click", () => {
       modal.style.display = "block";
+      input.focus();
+
+      const form = document.getElementById("add-todo__form");
+      form.addEventListener("submit", (e) => {
+        const content = e.target.content.value;
+        const selectedCategory = item.previousElementSibling.innerText;
+
+        let localStorageData = JSON.parse(localStorage.getItem("todo_data"));
+        localStorageData
+          .find((item) => item.category === selectedCategory)
+          .list.push({
+            content: content,
+            done: false,
+          });
+        localStorage.setItem("todo_data", JSON.stringify(localStorageData));
+        todoCounting++;
+        modal.style.display = "none";
+      });
     });
   });
 
