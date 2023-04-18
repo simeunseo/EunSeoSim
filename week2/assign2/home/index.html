@@ -99,8 +99,12 @@
 
     <template id="todo__list__template">
       <li>
-        <i class="done-btn fa-solid fa-heart" done="{done}"></i>
-        <span>{todo_content}</span>
+        <i class="done-btn fa-solid fa-heart" done="{done}">
+          <input type="button" id="{todo_content}" />
+        </i>
+        <label for="{todo_content}" category="{category_name}"
+          >{todo_content}</label
+        >
       </li>
     </template>
 
