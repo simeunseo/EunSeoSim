@@ -1,4 +1,4 @@
-@import url("./reset.css");
+@import url("../common/reset.css");
 
 /* CSS 전역 변수 선언 */
 :root {

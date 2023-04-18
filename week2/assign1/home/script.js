@@ -1,4 +1,4 @@
-import ITEM_LIST from "./data/item_data.js";
+import ITEM_LIST from "../data/item_data.js";
 
 //checkbox의 id를 카테고리명으로 변환하기 위한 객체
 const CATEGORY_NAME = {
