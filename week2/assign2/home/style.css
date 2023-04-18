@@ -134,7 +134,7 @@ footer i {
 
 /* modal */
 
-.form__container {
+#form__container {
   padding: 1rem 3rem;
 
   display: flex;
@@ -146,12 +146,19 @@ footer i {
   border-radius: 1rem;
 
   position: absolute;
+  z-index: 2;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-.add-todo__modal {
+#close-btn {
+  align-self: end;
+  right: -2rem;
+  position: relative;
+}
+
+#add-todo__modal {
   display: none;
 
   width: 34rem;
@@ -174,7 +181,7 @@ form > input {
   margin: 1rem 0;
 }
 
-.form__container > h2 {
+#form__container > h2 {
   margin-top: 1rem;
 }
 
