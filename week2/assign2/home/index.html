@@ -11,6 +11,15 @@
     <header>
       <h1>web todo mate</h1>
     </header>
+    <aside class="add-todo__modal">
+      <section class="form__container">
+        <h2>할 일 추가하기</h2>
+        <form>
+          <input required type="text" name="content" id="add-todo__content" />
+        </form>
+        <button type="submit"><h3>추가</h3></button>
+      </section>
+    </aside>
     <main>
       <section>
         <ol id="calendar">
@@ -89,7 +98,7 @@
       <article>
         <div class="todo__categories__title {bg_color}">
           <h2>{category_name}</h2>
-          <i class="fa-solid fa-circle-plus"></i>
+          <i class="fa-solid fa-circle-plus add-btn"></i>
         </div>
         <ul class="todo__categories__content">
           {todos}

@@ -46,6 +46,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+button {
+  background: none;
+}
 
 /* global setting */
 :root {
@@ -69,9 +72,8 @@ body {
 
   background-color: white;
 
-  width: 30rem;
+  width: 34rem;
   height: 100vh;
-  padding: 2rem;
 
   display: flex;
   flex-direction: column;
@@ -111,4 +113,8 @@ h2 {
 
 span {
   font-size: 1rem;
+}
+
+main {
+  margin: 0 2rem;
 }
