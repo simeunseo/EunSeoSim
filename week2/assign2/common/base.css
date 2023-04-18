@@ -27,7 +27,8 @@ section {
   display: block;
 }
 ol,
-ul {
+ul,
+li {
   list-style: none;
 }
 blockquote,

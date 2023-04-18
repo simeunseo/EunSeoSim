@@ -47,6 +47,7 @@ header {
   color: var(--grey--color);
 }
 
+i[done="true"],
 .selected {
   color: rgb(0, 0, 0);
 }
@@ -57,16 +58,13 @@ header {
   flex-wrap: wrap;
 }
 
-.todo__categories {
-  margin: 1rem 0;
-}
-
 .todo__categories__title {
   display: flex;
   width: max-content;
   align-items: center;
   border-radius: 2rem;
   padding: 0.5rem 0.8rem;
+  margin: 1rem 0;
   color: white;
   border: 0.1rem solid var(--grey--color);
   background-color: var(--grey--color); /* default color */
