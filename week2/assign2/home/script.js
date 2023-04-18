@@ -91,3 +91,19 @@ function listToTodoList(list, categoryName) {
 
   return finalHtml;
 }
+
+function checkModal() {
+  const modal = document.getElementById("add-todo__modal");
+  const addBtn = document.getElementsByClassName("add-btn");
+  const addBtnList = [...addBtn];
+  addBtnList.forEach((item) => {
+    item.addEventListener("click", () => {
+      modal.style.display = "block";
+    });
+  });
+
+  const closeBtn = document.getElementById("close-btn");
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+}
