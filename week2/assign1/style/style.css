@@ -6,6 +6,29 @@
   --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
+/* animation */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0.2;
+    transform: translateY(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0.2;
+    transform: translateX(20%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
 /* font setting */
 @font-face {
   font-family: "Pretendard-Regular";
@@ -44,6 +67,9 @@ small {
 }
 
 /* header */
+header > a {
+  color: white;
+}
 header {
   padding: 2rem;
   width: -webkit-fill-available;
@@ -56,11 +82,14 @@ header {
 
   background-color: var(--main-color);
   color: white;
+
+  box-shadow: -1rem 0 1rem var(--shadow-color);
 }
 
 #header__menu {
   display: none;
   box-shadow: -1rem 0 1rem var(--shadow-color);
+  animation: fadeInRight 0.7s;
 }
 
 #header__button {
@@ -148,6 +177,7 @@ nav li {
 nav li:hover {
   background-color: black;
   color: white;
+  transition-duration: 0.3s;
 }
 
 nav label {
@@ -209,6 +239,8 @@ img {
   padding: 2rem 1rem;
   margin: 0.5rem;
   height: fit-content;
+
+  animation: fadeInUp 1s;
 }
 
 .cards__card > * {
@@ -228,6 +260,7 @@ img {
 
 .cards__card i:hover {
   color: var(--main-color);
+  transition-duration: 0.3s;
 }
 
 .cards__card__tags {
@@ -274,6 +307,7 @@ img {
 
 #category-tags__box label:hover {
   color: black;
+  transition-duration: 0.3s;
 }
 
 .category-tag {

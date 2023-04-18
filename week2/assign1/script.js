@@ -20,7 +20,7 @@ const checkBoxAll = document.getElementById("check-all");
 //브라우저를 처음 실행할 때 전체 카테고리가 디폴트로 선택
 window.onload = () => {
   localStorage.getItem("item_data") === null &&
-    localStorage.setItem("item_data", JSON.stringify(ITEM_LIST)); //localStorage에 아이템 목록 저장
+    localStorage.setItem("item_data", JSON.stringify(ITEM_LIST)); //localStorage에 초기화
   newItemList = JSON.parse(localStorage.getItem("item_data")); //localStorage에 저장된 목록을 가져옴
 
   document.getElementById("check-all").checked = true; //전체 카테고리는 디폴트로 체크
