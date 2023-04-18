@@ -57,7 +57,7 @@
           <li>
             <h3>토</h3>
             <div class="calendar__todo-num selected">
-              <small>4</small>
+              <small id="today__todoCounting"></small>
               <i class="fa-solid fa-heart selected"></i>
             </div>
             <h3 class="selected">8</h3>
@@ -99,7 +99,7 @@
 
     <template id="todo__list__template">
       <li>
-        <i class="fa-solid fa-heart" done="{done}"></i>
+        <i class="done-btn fa-solid fa-heart" done="{done}"></i>
         <span>{todo_content}</span>
       </li>
     </template>
