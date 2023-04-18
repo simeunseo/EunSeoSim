@@ -56,6 +56,8 @@ function todoCount() {
 
 //list를 탐색하면서 요소를 하나씩 투두로 만드는 함수
 function listToTodo(list) {
+  todoCount();
+  todoCounting = 0;
   const todoSection = document.getElementById("todo"); //투두리스트가 들어갈 부모노드
   const todoTemplate = document.getElementById("todo__template"); //todo(전체 박스) 템플릿
   todoSection.replaceChildren();
@@ -104,6 +106,7 @@ function checkModal() {
 
       const form = document.getElementById("add-todo__form");
       form.addEventListener("submit", (e) => {
+        e.preventDefault();
         const content = e.target.content.value;
         const selectedCategory = item.previousElementSibling.innerText;
 
@@ -124,6 +127,9 @@ function checkModal() {
         localStorage.setItem("todo_data", JSON.stringify(localStorageData));
         todoCounting++;
         modal.style.display = "none";
+        todoData = JSON.parse(localStorage.getItem("todo_data"));
+        listToTodo(todoData);
+        checkDone();
       });
     });
   });
