@@ -2,7 +2,14 @@ import TODO_DATA from "../common/todoData.js";
 
 const COLOR_LIST = ["red", "green", "yellow", "blue"];
 
-listToTodo(TODO_DATA);
+let todoData = []; //localStorage에 저장된 목록을 가져와 저장하는 배열
+
+window.onload = () => {
+  localStorage.getItem("todo_data") === null &&
+    localStorage.setItem("todo_data", JSON.stringify(TODO_DATA)); //localStorage 초기화
+  todoData = JSON.parse(localStorage.getItem("todo_data")); //localStorage에 저장된 목록을 가져옴
+  listToTodo(todoData);
+};
 
 //list를 탐색하면서 요소를 하나씩 투두로 만드는 함수
 function listToTodo(list) {
