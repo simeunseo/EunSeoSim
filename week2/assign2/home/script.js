@@ -12,6 +12,7 @@ window.onload = () => {
   listToTodo(todoData);
   todoCount();
   checkDone();
+  checkModal();
 };
 
 //할일 클릭을 감지하여 처리하는 함수
