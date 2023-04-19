@@ -54,12 +54,9 @@ i[done="true"],
 /* todo */
 #todo {
   display: flex;
-  justify-content: space-around;
   flex-wrap: wrap;
-}
-
-#todo > article {
-  margin-right: 2rem;
+  width: 29rem;
+  padding: 0 1rem;
 }
 
 .todo__categories__title {
