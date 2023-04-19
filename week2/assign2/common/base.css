@@ -149,6 +149,12 @@ footer i {
   margin-bottom: 0.5rem;
 }
 
+#btn-calendar:hover,
+#btn-my:hover {
+  background-color: var(--grey--color);
+  color: white;
+}
+
 .todo__categories__title {
   display: flex;
   width: max-content;
