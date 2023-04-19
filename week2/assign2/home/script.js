@@ -56,7 +56,6 @@ function todoCount() {
 
 //list를 탐색하면서 요소를 하나씩 투두로 만드는 함수
 function listToTodo(list) {
-  todoCount();
   todoCounting = 0;
   const todoSection = document.getElementById("todo"); //투두리스트가 들어갈 부모노드
   const todoTemplate = document.getElementById("todo__template"); //todo(전체 박스) 템플릿
@@ -69,12 +68,13 @@ function listToTodo(list) {
 
     todoNewHtml = todoNewHtml //복사한 html에서 필요한 부분을 item 내용에 맞게 변경
       .replace("{bg_color}", "bg-" + COLOR_LIST[idx % COLOR_LIST.length]) //COLOR_LIST에 있는 색 목록이 돌아가면서 나오도록 함!
-      .replace("{category_name}", item.category)
+      .replace(/{category_name}/gi, item.category)
       .replace("{todos}", todoListNewHtml);
 
     todoContent.innerHTML = todoNewHtml; //새롭게 바뀐 html을 템플릿에 적용
     todoSection.appendChild(todoContent.content); //부모노드 안에 넣기
   });
+  todoCount();
 }
 
 function listToTodoList(list, categoryName) {
@@ -90,57 +90,66 @@ function listToTodoList(list, categoryName) {
       .replace(/{todo_content}/gi, item.content);
     finalHtml += todoListNewHtml;
   });
-
   return finalHtml;
 }
 
+let curModalFor = null;
+//modal의 열고 닫힘을 관리하는 함수
 function checkModal() {
-  console.log("call checkModal");
-  const input = document.getElementById("add-todo__content");
   const modal = document.getElementById("add-todo__modal");
   const addBtn = document.getElementsByClassName("add-btn");
   const addBtnList = [...addBtn];
+
+  addBtnList.forEach((item) => {
+    item.addEventListener("click", (e) => {
+      modal.style.display = "block"; //+버튼 클릭시 모달 보이기
+      document.getElementById("add-todo__content").focus();
+      curModalFor = item.previousElementSibling.innerHTML;
+    });
+  });
+
+  curModalFor || resolveModal(modal);
+
   const closeBtn = document.getElementById("close-btn");
   closeBtn.addEventListener("click", () => {
     modal.style.display = "none";
+    curModalFor = null;
   });
+}
 
-  let selectedCategory = "";
-  addBtnList.forEach((item) => {
-    item.addEventListener("click", () => {
-      selectedCategory = item.previousElementSibling.innerText;
-      console.log(selectedCategory, "체크 감지");
-      modal.style.display = "block";
-      input.focus();
-      const form = document.getElementById("add-todo__form");
-      form.addEventListener("submit", (e) => {
-        console.log(e.target.content.value, "form submit");
-        e.preventDefault();
-        const content = e.target.content.value;
-
-        let localStorageData = JSON.parse(localStorage.getItem("todo_data"));
-        let contentList = localStorageData.find(
-          (item) => item.category === selectedCategory
-        ).list;
-        let isExist = false;
-        contentList.forEach((item) => {
-          item.content === content && (isExist = true);
-        });
-        if (isExist) {
-          alert("이미 등록된 항목입니다.");
-        } else {
-          contentList.push({
-            content: content,
-            done: false,
-          });
-          localStorage.setItem("todo_data", JSON.stringify(localStorageData));
-          todoCounting++;
-          todoData = JSON.parse(localStorage.getItem("todo_data"));
-          listToTodo(todoData);
-          checkDone();
-        }
-        modal.style.display = "none";
-      });
+//modal 안에서 일어나는 인터랙션을 관리하는 함수
+function resolveModal(modal) {
+  let formInput = "";
+  const form = document.getElementById("add-todo__form");
+  //form이 제출됐을 때
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    //사용자 입력값을 formInput에 저장
+    formInput = document.getElementById("add-todo__content").value;
+    let localStorageData = JSON.parse(localStorage.getItem("todo_data"));
+    let contentList = localStorageData.find(
+      (item) => item.category === curModalFor
+    ).list;
+    let isExist = false;
+    contentList.forEach((item) => {
+      item.content === formInput && (isExist = true);
     });
+    if (isExist) {
+      alert("이미 등록된 항목입니다.");
+    } else {
+      contentList.push({
+        content: formInput,
+        done: false,
+      });
+      localStorage.setItem("todo_data", JSON.stringify(localStorageData));
+      todoCounting++;
+      todoData = JSON.parse(localStorage.getItem("todo_data"));
+      listToTodo(todoData);
+      checkDone();
+      checkModal();
+    }
+    modal.style.display = "none";
+    document.getElementById("add-todo__content").value = "";
+    curModalFor = null;
   });
 }
