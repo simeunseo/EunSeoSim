@@ -1,16 +1,30 @@
 @import url("../common/base.css");
 
+body {
+  justify-content: space-between;
+  height: 100vh;
+}
+
 main > h2 {
   text-align: center;
   margin-bottom: 2rem;
 }
-#order-change {
+
+#order-change__section {
+  display: flex;
+  justify-content: space-evenly;
   text-align: center;
-  position: relative;
+
   margin-bottom: 3rem;
+  padding: 1rem;
+
   border: 0.1rem solid var(--grey--color);
   border-radius: 1rem;
-  padding: 1rem;
+
   box-shadow: 0rem 0.7rem 0.1rem var(--grey--color);
   color: var(--grey--color);
+}
+
+.todo__categories__title {
+  cursor: pointer;
 }
