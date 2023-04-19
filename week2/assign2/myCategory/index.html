@@ -32,7 +32,11 @@
     </footer>
 
     <template id="categories__template">
-      <div class="todo__categories__title {bg_color}">
+      <div
+        id="{category_name}"
+        class="todo__categories__title {bg_color}"
+        draggable="true"
+      >
         <h2>{category_name}</h2>
       </div>
     </template>
