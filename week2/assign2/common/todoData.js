@@ -1,4 +1,4 @@
-const TODO_DATA = [
+export const TODO_DATA = [
   {
     category: "과제",
     list: [
@@ -11,7 +11,6 @@ const TODO_DATA = [
         done: true,
       },
     ],
-    color: "red",
   },
   {
     category: "공부",
@@ -25,7 +24,6 @@ const TODO_DATA = [
         done: true,
       },
     ],
-    color: "green",
   },
   {
     category: "일과",
@@ -39,7 +37,6 @@ const TODO_DATA = [
         done: false,
       },
     ],
-    color: "yellow",
   },
   {
     category: "동아리",
@@ -49,8 +46,12 @@ const TODO_DATA = [
         done: true,
       },
     ],
-    color: "blue",
   },
 ];
 
-export default TODO_DATA;
+export const CATEOGORY_COLOR = {
+  과제: "red",
+  공부: "green",
+  일과: "yellow",
+  동아리: "blue",
+};

@@ -1,27 +1,5 @@
-/*
-document.getElementById("draggable-1").ondragstart = onDragStart;
-
-function onDragStart(event) {
-  event.dataTransfer.setData("text", event.target.id);
-  event.currentTarget.style.backgroundColor = "yellow";
-}
-
-document.getElementById("example-dropzone").ondragover = onDragOver;
-document.getElementById("example-dropzone").ondrop = onDrop;
-function onDragOver(event) {
-  event.preventDefault();
-}
-
-function onDrop(event) {
-  const id = event.dataTransfer.getData("text");
-  const draggableElement = document.getElementById(id);
-  const dropzone = event.target;
-  dropzone.appendChild(draggableElement);
-  event.dataTransfer.clearData();
-}
-*/
-
-import TODO_DATA from "../common/todoData.js";
+import { CATEOGORY_COLOR } from "../common/todoData.js";
+import { TODO_DATA } from "../common/todoData.js";
 
 let todoData = [];
 let categoryList = [];
@@ -30,35 +8,36 @@ window.onload = () => {
   localStorage.getItem("todo_data") === null &&
     localStorage.setItem("todo_data", JSON.stringify(TODO_DATA)); //localStorage 초기화
   todoData = JSON.parse(localStorage.getItem("todo_data")); //localStorage에 저장된 목록을 가져옴
-  extractCategoryName(todoData);
-  makeCategories(todoData);
-};
 
-function extractCategoryName(list) {
-  list.forEach((item) => {
-    categoryList.push(item.category);
-  });
-}
+  makeCategories(extractCategoryName(todoData));
+};
 
 function makeCategories(list) {
   const section = document.getElementById("order-change__section");
   const categoriesTemplate = document.getElementById("categories__template");
 
   section.replaceChildren();
-  list.forEach((item) => {
+  list.forEach((category) => {
     let content = categoriesTemplate.cloneNode(true);
     let newHtml = content.innerHTML;
 
     newHtml = newHtml
-      .replace("{bg_color}", "bg-" + item.color)
-      .replace(/{category_name}/gi, item.category);
+      .replace("{bg_color}", "bg-" + CATEOGORY_COLOR[category])
+      .replace(/{category_name}/gi, category);
 
     content.innerHTML = newHtml;
     section.appendChild(content.content);
 
-    const categoryItem = document.getElementById(item.category);
+    const categoryItem = document.getElementById(category);
     resolveDragDrop(categoryItem, section);
   });
+}
+
+function extractCategoryName(list) {
+  list.forEach((item) => {
+    categoryList.push(item.category);
+  });
+  return categoryList;
 }
 
 function resolveDragDrop(item, parent) {
@@ -74,8 +53,48 @@ function resolveDragDrop(item, parent) {
     let dropZone = e.target;
     dropZone.tagName === "H2" && (dropZone = dropZone.parentElement);
 
-    parent.insertBefore(draggedItem, dropZone);
+    categoryList =
+      categoryList.indexOf(draggedItem.id) < categoryList.indexOf(dropZone.id)
+        ? arrayInsertAfter(categoryList, draggedItem.id, dropZone.id) //draggedItem이 dropZone보다 앞에 있었던 거라면 dropZone의 뒤로 옮긴다.
+        : arrayInsertBefore(categoryList, draggedItem.id, dropZone.id); //draggedItem이 dropZone보다 뒤에 있었던 거라면 dropZone의 앞으로 옮긴다.
 
+    makeCategories(categoryList);
+    changeLocalStorage(categoryList);
     e.dataTransfer.clearData();
   };
+}
+
+//array에서 target value를 reference value의 바로 뒤로 순서를 옮기는 함수
+function arrayInsertAfter(array, target, reference) {
+  const targetIdx = array.indexOf(target.toString());
+  array.splice(targetIdx, 1);
+  const referenceIdx = array.indexOf(reference.toString());
+  array.splice(referenceIdx + 1, 0, target);
+  return array;
+}
+
+//array에서 target value를 reference value의 바로 앞으로 순서를 옮기는 함수
+function arrayInsertBefore(array, target, reference) {
+  const targetIdx = array.indexOf(target.toString());
+  array.splice(targetIdx, 1);
+  let referenceIdx = array.indexOf(reference.toString());
+  referenceIdx || (referenceIdx = 0);
+  array.splice(referenceIdx, 0, target);
+  return array;
+}
+
+//변경된 categoryList(순서)에 따라 전체 데이터를 재배치하여 localStorage에 반영하는 함수
+function changeLocalStorage(list) {
+  let newData = []; //재배치된 데이터를 저장할 변수
+  let localStorageData = JSON.parse(localStorage.getItem("todo_data")); //기존 localStorage 데이터
+  list.forEach((category) => {
+    let filteredItem = localStorageData.filter(
+      (item) => item.category === category
+    )[0];
+    newData.push({
+      category: filteredItem.category,
+      list: filteredItem.list,
+    });
+  });
+  localStorage.setItem("todo_data", JSON.stringify(newData));
 }
