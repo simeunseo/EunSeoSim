@@ -11,8 +11,8 @@ window.onload = () => {
   todoData = JSON.parse(localStorage.getItem("todo_data")); //localStorage에 저장된 목록을 가져옴
   listToTodo(todoData);
   checkDone();
-  checkModal();
   todoCount();
+  checkModal();
 };
 
 //할일 클릭을 감지하여 처리하는 함수
@@ -95,20 +95,28 @@ function listToTodoList(list, categoryName) {
 }
 
 function checkModal() {
+  console.log("call checkModal");
   const input = document.getElementById("add-todo__content");
   const modal = document.getElementById("add-todo__modal");
   const addBtn = document.getElementsByClassName("add-btn");
   const addBtnList = [...addBtn];
+  const closeBtn = document.getElementById("close-btn");
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  let selectedCategory = "";
   addBtnList.forEach((item) => {
     item.addEventListener("click", () => {
+      selectedCategory = item.previousElementSibling.innerText;
+      console.log(selectedCategory, "체크 감지");
       modal.style.display = "block";
       input.focus();
-
       const form = document.getElementById("add-todo__form");
       form.addEventListener("submit", (e) => {
+        console.log(e.target.content.value, "form submit");
         e.preventDefault();
         const content = e.target.content.value;
-        const selectedCategory = item.previousElementSibling.innerText;
 
         let localStorageData = JSON.parse(localStorage.getItem("todo_data"));
         let contentList = localStorageData.find(
@@ -118,24 +126,21 @@ function checkModal() {
         contentList.forEach((item) => {
           item.content === content && (isExist = true);
         });
-        isExist
-          ? alert("이미 등록된 항목입니다.")
-          : contentList.push({
-              content: content,
-              done: false,
-            });
-        localStorage.setItem("todo_data", JSON.stringify(localStorageData));
-        todoCounting++;
+        if (isExist) {
+          alert("이미 등록된 항목입니다.");
+        } else {
+          contentList.push({
+            content: content,
+            done: false,
+          });
+          localStorage.setItem("todo_data", JSON.stringify(localStorageData));
+          todoCounting++;
+          todoData = JSON.parse(localStorage.getItem("todo_data"));
+          listToTodo(todoData);
+          checkDone();
+        }
         modal.style.display = "none";
-        todoData = JSON.parse(localStorage.getItem("todo_data"));
-        listToTodo(todoData);
-        checkDone();
       });
     });
-  });
-
-  const closeBtn = document.getElementById("close-btn");
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
   });
 }
