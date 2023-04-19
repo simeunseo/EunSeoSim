@@ -55,7 +55,7 @@ button {
   --grey--color: rgb(201, 201, 201);
   --red--color: rgb(255, 86, 86);
   --green--color: rgb(103, 190, 93);
-  --yellow--color: rgb(249, 210, 72);
+  --yellow--color: rgb(237, 199, 63);
   --blue--color: rgb(85, 133, 236);
 }
 
@@ -147,4 +147,33 @@ footer div {
 
 footer i {
   margin-bottom: 0.5rem;
+}
+
+.todo__categories__title {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  border-radius: 2rem;
+  padding: 0.5rem 0.8rem;
+  margin: 1rem 0;
+  color: white;
+  border: 0.1rem solid white;
+  background-color: var(--grey--color); /* default color */
+  box-shadow: 0rem 0.5rem 0.1rem var(--grey--color);
+}
+
+.bg-red {
+  background-color: var(--red--color);
+}
+
+.bg-green {
+  background-color: var(--green--color);
+}
+
+.bg-yellow {
+  background-color: var(--yellow--color);
+}
+
+.bg-blue {
+  background-color: var(--blue--color);
 }

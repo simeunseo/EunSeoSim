@@ -58,7 +58,7 @@ function listToTodo(list) {
   const todoSection = document.getElementById("todo"); //투두리스트가 들어갈 부모노드
   const todoTemplate = document.getElementById("todo__template"); //todo(전체 박스) 템플릿
   todoSection.replaceChildren();
-  list.forEach((item, idx) => {
+  list.forEach((item) => {
     let todoListNewHtml = listToTodoList(item.list, item.category);
 
     let todoContent = todoTemplate.cloneNode(true); //템플릿 복사
@@ -66,7 +66,7 @@ function listToTodo(list) {
 
     todoNewHtml = todoNewHtml //복사한 html에서 필요한 부분을 item 내용에 맞게 변경
       .replace("{bg_color}", "bg-" + item.color)
-      .replace(/{category_name}/gi, item.category)
+      .replace("{category_name}", item.category)
       .replace("{todos}", todoListNewHtml);
 
     todoContent.innerHTML = todoNewHtml; //새롭게 바뀐 html을 템플릿에 적용

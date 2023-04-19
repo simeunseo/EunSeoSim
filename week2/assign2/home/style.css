@@ -53,35 +53,6 @@ i[done="true"],
   padding: 0 1rem;
 }
 
-.todo__categories__title {
-  display: flex;
-  width: max-content;
-  align-items: center;
-  border-radius: 2rem;
-  padding: 0.5rem 0.8rem;
-  margin: 1rem 0;
-  color: white;
-  border: 0.1rem solid var(--grey--color);
-  background-color: var(--grey--color); /* default color */
-  box-shadow: 0rem 0.5rem 0.1rem var(--grey--color);
-}
-
-.bg-red {
-  background-color: var(--red--color);
-}
-
-.bg-green {
-  background-color: var(--green--color);
-}
-
-.bg-yellow {
-  background-color: var(--yellow--color);
-}
-
-.bg-blue {
-  background-color: var(--blue--color);
-}
-
 .todo__categories__title > i {
   margin-left: 1rem;
   font-size: 1.5rem;
