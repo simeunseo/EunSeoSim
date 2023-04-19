@@ -135,7 +135,13 @@ function resolveModal(modal) {
       item.content === formInput && (isExist = true);
     });
     if (isExist) {
-      alert("이미 등록된 항목입니다.");
+      alert(
+        "[" +
+          curModalFor +
+          "] 카테고리에 '" +
+          formInput +
+          "' 항목이 이미 존재해요!"
+      );
     } else {
       contentList.push({
         content: formInput,
