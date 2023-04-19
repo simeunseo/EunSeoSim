@@ -11,6 +11,7 @@ const TODO_DATA = [
         done: true,
       },
     ],
+    color: "red",
   },
   {
     category: "공부",
@@ -24,6 +25,7 @@ const TODO_DATA = [
         done: true,
       },
     ],
+    color: "green",
   },
   {
     category: "일과",
@@ -37,6 +39,7 @@ const TODO_DATA = [
         done: false,
       },
     ],
+    color: "yellow",
   },
   {
     category: "동아리",
@@ -46,6 +49,7 @@ const TODO_DATA = [
         done: true,
       },
     ],
+    color: "blue",
   },
 ];
 

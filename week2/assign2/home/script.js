@@ -1,7 +1,5 @@
 import TODO_DATA from "../common/todoData.js";
 
-const COLOR_LIST = ["red", "green", "yellow", "blue"];
-
 let todoData = []; //localStorage에 저장된 목록을 가져와 저장하는 배열
 let todoCounting = 0; //미완료 할일의 수
 
@@ -67,7 +65,7 @@ function listToTodo(list) {
     let todoNewHtml = todoContent.innerHTML; //템플릿 안의 html 복사
 
     todoNewHtml = todoNewHtml //복사한 html에서 필요한 부분을 item 내용에 맞게 변경
-      .replace("{bg_color}", "bg-" + COLOR_LIST[idx % COLOR_LIST.length]) //COLOR_LIST에 있는 색 목록이 돌아가면서 나오도록 함!
+      .replace("{bg_color}", "bg-" + item.color)
       .replace(/{category_name}/gi, item.category)
       .replace("{todos}", todoListNewHtml);
 
@@ -147,6 +145,7 @@ function resolveModal(modal) {
         content: formInput,
         done: false,
       });
+
       localStorage.setItem("todo_data", JSON.stringify(localStorageData));
       todoCounting++;
       todoData = JSON.parse(localStorage.getItem("todo_data"));
