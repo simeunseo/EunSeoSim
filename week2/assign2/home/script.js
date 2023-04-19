@@ -1,4 +1,5 @@
-import TODO_DATA from "../common/todoData.js";
+import { CATEOGORY_COLOR } from "../common/todoData.js";
+import { TODO_DATA } from "../common/todoData.js";
 
 let todoData = []; //localStorage에 저장된 목록을 가져와 저장하는 배열
 let todoCounting = 0; //미완료 할일의 수
@@ -65,7 +66,7 @@ function listToTodo(list) {
     let todoNewHtml = todoContent.innerHTML; //템플릿 안의 html 복사
 
     todoNewHtml = todoNewHtml //복사한 html에서 필요한 부분을 item 내용에 맞게 변경
-      .replace("{bg_color}", "bg-" + item.color)
+      .replace("{bg_color}", "bg-" + CATEOGORY_COLOR[item.category])
       .replace("{category_name}", item.category)
       .replace("{todos}", todoListNewHtml);
 
