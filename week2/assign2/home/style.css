@@ -71,12 +71,16 @@ i[done="true"],
   align-items: center;
 }
 
-.todo__categories__content i {
+.add-btn {
   font-size: 1.2rem;
 }
 
 .todo__categories__content i:hover {
   color: black;
+}
+
+.add-btn:hover {
+  color: var(--grey--color);
 }
 
 /* modal */

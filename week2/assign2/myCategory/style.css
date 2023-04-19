@@ -28,3 +28,23 @@ main > h2 {
 .todo__categories__title {
   cursor: pointer;
 }
+
+.todo__categories__title:hover {
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-1.2rem);
+  }
+  60% {
+    transform: translateY(-0.7rem);
+  }
+}
