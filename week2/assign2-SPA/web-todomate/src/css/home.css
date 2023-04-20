@@ -1,5 +1,13 @@
 @import url("./base.css");
 
+#home-container {
+  width: 34rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
 /* calendar */
 #calendar {
   display: grid;
