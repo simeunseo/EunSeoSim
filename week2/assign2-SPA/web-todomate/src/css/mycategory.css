@@ -1,7 +1,11 @@
 @import url("./base.css");
 
-body {
+#mycategory-container {
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
+
+  width: 34rem;
   height: 100vh;
 }
 
@@ -29,7 +33,7 @@ main > h2 {
   cursor: pointer;
 }
 
-.todo__categories__title:hover {
+.bounce:hover {
   animation: bounce 1s ease infinite;
 }
 

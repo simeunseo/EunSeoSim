@@ -105,6 +105,7 @@ function MyCategory($container) {
 
   this.render = () => {
     this.$container.innerHTML = `
+    <div id="mycategory-container">
     <header>
       <h1>web todo mate</h1>
     </header>
@@ -131,12 +132,13 @@ function MyCategory($container) {
     <template id="categories__template">
       <div
         id="{category_name}"
-        class="todo__categories__title {bg_color}"
+        class="todo__categories__title bounce {bg_color}"
         draggable="true"
       >
         <h2>{category_name}</h2>
       </div>
     </template>
+    </div>
           `;
   };
   this.render();

@@ -167,6 +167,7 @@ function Home($container) {
 
   this.render = () => {
     this.$container.innerHTML = `
+    <div id="home-container">
     <header>
     <h1>web todo mate</h1>
   </header>
@@ -287,6 +288,7 @@ function Home($container) {
       <button type="submit"><h3>추가</h3></button>
     </form>
   </template>
+  </div>
           `;
   };
   this.render();

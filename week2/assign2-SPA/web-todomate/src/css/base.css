@@ -71,12 +71,6 @@ body {
   font-family: "Pretendard-Regular";
 
   background-color: white;
-
-  width: 34rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
 }
 
 i,
@@ -182,4 +176,8 @@ footer i {
 
 .bg-blue {
   background-color: var(--blue--color);
+}
+
+button[type="submit"] {
+  cursor: pointer;
 }
