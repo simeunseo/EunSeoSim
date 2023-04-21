@@ -1,4 +1,8 @@
+# 생각 과제
+
 # Q1. **Presentation Component - Container Component ↔ Custom hook ↔ Atomic를** 비교해보자!
+
+## **Presentation Component - Container Component**
 
 Presentation Component와 Container Component는 Redux를 사용하는 프로젝트에서 자주 사용되는 구조이다.
 
@@ -25,21 +29,114 @@ React에서 컴포넌트의 재사용성과 유지보수성을 높이기 위해�
 - 주로 데이터 저장소로 활용되며, state를 갖는 경우가 많다. Redux에 직접적으로 접근할 수 있다.
 - ex) UserPage, FollowersSlidebar, StoryContainer, FollowedUserList, …
 
+## Custom Hooks
+
+개발자가 직접 만든 hook으로, 반복되는 로직을 묶어서 하나의 컴포넌트로 만들듯이 반복되는 method를 하나로 묶어서 사용하고 관리하는 것이다.
+
+- 기존 container에서는 공통 로직이 발생했을 때 다른 container 컴포넌트로 로직을 넘겨주지 못했는데, hooks로 로직을 관리하면 UI 재사용을 넘어 로직까지 재사용이 가능해진다. 해당 로직이 필요한 컴포넌트에서 hooks를 불러오기만 하면 로직을 사용할 수 있다.
+- 유저의 Input을 관리할 때나 Fetch를 요청할 때 주로 사용된다.
+- React 내장 hook과 마찬가지로 항상 ‘use’로 시작해야한다. (useInput, useFetch 등)
+
+### 예제 코드
+
+custom hook 사용 전
+
+```jsx
+function App() {
+  const [user, setUser] = useState([]);
+  const url = 'https//하나둘셋넷다섯';
+
+  useEffect(() => {
+    fetch(url)
+     .then(res => res.json())
+     .then(res => setUser(res))
+  }, [])
+```
+
+custom hook 만들기
+
+```jsx
+function useFetch(url) {
+  const [value, setValue] = useState([]);
+
+  useEffect(() => {
+    fetch(url)
+      .then((res) => res.json())
+      .then((res) => setValue(res));
+  }, [url]);
+
+  return value;
+}
+```
+
+custom hook 적용하기
+
+```jsx
+import useFetch from './hooks/useFetch';
+
+function App() {
+  const user = useFetch('https://하나둘셋넷다섯');
+
+  return (
+    //JSX
+    );
+};
+
+export default App;
+```
+
+## Atomic
+
+atomic 구조는 React 컴포넌트를 Atom(원자) 단위로 설계하는 구조이다. 원자가 결합하여 분자가 되고, 분자가 결합하여 유기체가 되듯이 컴포넌트를 가장 작은 단위에서 하나씩 결합하여 만드는 방식이다.
+
+- atomic 구조를 사용하면 UI 재사용성이 매우 뛰어나지만, 디자인 시스템 구축을 위한 초기 비용이 많이 들고, 로직과 state들을 낮은 단위의 컴포넌트에서 다루지 못하고 props로 내려주어야 한다.
+- 디자인이 잘 나와있어서 디자인 시스템을 구축하기 편한 환경이라면 atomic 구조를 잘 활용할 수 있겠지만, 기획과 디자인이 자주 변경되는 환경에서는 atomic 디자인을 추천하지 않는다.
+
+### Atoms
+
+HTML 태그 같은 label, input, button, link 등 가장 작은 단위의 컴포넌트
+
+[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcvZe2U%2FbtrtvrP2YqU%2F3xdbaaKaHnjE84ARkKw41K%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcvZe2U%2FbtrtvrP2YqU%2F3xdbaaKaHnjE84ARkKw41K%2Fimg.png)
+
+### Molecule
+
+Atom을 여러개 조합한 컴포넌트
+
+[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzlU9u%2FbtrtwkbXyvW%2F5vuYIf0bNFlBDex9FY5J90%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzlU9u%2FbtrtwkbXyvW%2F5vuYIf0bNFlBDex9FY5J90%2Fimg.png)
+
+### Organisms
+
+Molecule과 Atom들을 조합한 컴포넌트
+
+[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrdNmo%2FbtrtmghFhIW%2FUwiY4jxykdFUJcuee6vnr1%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrdNmo%2FbtrtmghFhIW%2FUwiY4jxykdFUJcuee6vnr1%2Fimg.png)
+
+### Templates
+
+컴포넌트들을 넣을 레이아웃 컴포넌트
+
+[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FeosFYE%2FbtrtsTFH2Xe%2FGUADEIzN702y8rGnwfU9Y0%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FeosFYE%2FbtrtsTFH2Xe%2FGUADEIzN702y8rGnwfU9Y0%2Fimg.png)
+
+### Pages
+
+Template에 컴포넌트를 모두 주입한 컴포넌트
+
+[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc8ZpcI%2Fbtrtq8XGpsa%2FtgmKB0gzltkMowbY6MNobK%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc8ZpcI%2Fbtrtq8XGpsa%2FtgmKB0gzltkMowbY6MNobK%2Fimg.png)
+
 # 어떤 방식을 택해야 좋은 것일까?
 
 ### 어떻게 나눠야 할까
 
-컴포넌트를 나눌 때는 state를 가지고 있냐 아니냐와 같이 기능적인 부분보다는 해당 컴포넌트가 어떤 **목적**을 가지고 있는지에 집중하는 것이 좋다.
+컴포넌트를 나눌 때는 state를 가지고 있냐 아니냐와 같이 기능적인 부분보다는 해당 컴포넌트가 어떤 ****\*\*****목적****\*\*****을 가지고 있는지에 집중하는 것이 좋다.
 
-- ex) ContextMenu 컴포넌트는 어떤 **동작**을 수행하는 것이 목적이라기 보다, 어떻게 **보여지는가**가 목적이기 때문에 Presentation으로 분류하는 것이 좋다.
+- ex) ContextMenu 컴포넌트는 어떤 ****\*\*****동작****\*\*****을 수행하는 것이 목적이라기 보다, 어떻게 **보여지는가**가 목적이기 때문에 Presentation으로 분류하는 것이 좋다.
 
 ### 오해
 
 어떤 것을 Presentation으로 하고 어떤 것을 Container로 할지, 또 이 구조를 사용할지 말지는 자유이며 따라야할 규칙이 아니다. 따라서 둘의 구분을 너무 명확히 하려고 하지 말자. 별로 중요하지 않을 때도 있으며 명확히 구분하는 것도 어려운 일이다.
 
-<img src="https://user-images.githubusercontent.com/55528304/233558972-277c8eb6-e72d-403c-89ac-3c0bd10d0c22.png" alt="Dan-Abramov가-남긴-트윗">
+![Untitled](https://user-images.githubusercontent.com/55528304/233558972-277c8eb6-e72d-403c-89ac-3c0bd10d0c22.png)
 
-<small>이 방식을 제안한 Dan Abramov가 남긴 트윗 - 이제는 이 패턴을 추천하지 않는다고 한다.</small>
+이 방식을 제안한 Dan Abramov가 남긴 트윗 - 이제는 이 패턴을 추천하지 않는다고 한다.
 
 ### 비슷한 다른 분류법들
 
@@ -111,6 +208,7 @@ React에서 컴포넌트의 재사용성과 유지보수성을 높이기 위해�
 
 - [https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)
 - [https://redux.vlpt.us/1-2-presentational-and-container-components.html](https://redux.vlpt.us/1-2-presentational-and-container-components.html)
+- [https://velog.io/@niboo/React-Custom-Hook-이란](https://velog.io/@niboo/React-Custom-Hook-%EC%9D%B4%EB%9E%80)
 - [https://velog.io/@st_hwang/babwm67z](https://velog.io/@st_hwang/babwm67z)
 - [https://velog.io/@userhwseo/Atomic-Design](https://velog.io/@userhwseo/Atomic-Design)
 - [https://velog.io/@sisofiy626/React-리액트의-폴더-구조](https://velog.io/@sisofiy626/React-%EB%A6%AC%EC%95%A1%ED%8A%B8%EC%9D%98-%ED%8F%B4%EB%8D%94-%EA%B5%AC%EC%A1%B0)
