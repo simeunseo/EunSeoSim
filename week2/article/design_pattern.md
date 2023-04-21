@@ -1,6 +1,4 @@
-# 생각 과제
-
-# Q1. **Presentation Component - Container Component ↔ Custom hook ↔ Atomic를** 비교해보자!
+# Q1. Presentation Component - Container Component ↔ Custom hook ↔ Atomic를 비교해보자!
 
 ## **Presentation Component - Container Component**
 
@@ -39,51 +37,51 @@ React에서 컴포넌트의 재사용성과 유지보수성을 높이기 위해�
 
 ### 예제 코드
 
-custom hook 사용 전
+- custom hook 사용 전
 
-```jsx
-function App() {
+  ```jsx
+  function App() {
   const [user, setUser] = useState([]);
   const url = 'https//하나둘셋넷다섯';
 
   useEffect(() => {
-    fetch(url)
-     .then(res => res.json())
-     .then(res => setUser(res))
+      fetch(url)
+      .then(res => res.json())
+      .then(res => setUser(res))
   }, [])
-```
+  ```
 
-custom hook 만들기
+- custom hook 만들기
 
-```jsx
-function useFetch(url) {
-  const [value, setValue] = useState([]);
+  ```jsx
+  function useFetch(url) {
+    const [value, setValue] = useState([]);
 
-  useEffect(() => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((res) => setValue(res));
-  }, [url]);
+    useEffect(() => {
+      fetch(url)
+        .then((res) => res.json())
+        .then((res) => setValue(res));
+    }, [url]);
 
-  return value;
-}
-```
+    return value;
+  }
+  ```
 
-custom hook 적용하기
+- custom hook 적용하기
 
-```jsx
-import useFetch from './hooks/useFetch';
+  ```jsx
+  import useFetch from './hooks/useFetch';
 
-function App() {
+  function App() {
   const user = useFetch('https://하나둘셋넷다섯');
 
   return (
-    //JSX
-    );
-};
+      //JSX
+      );
+  };
 
-export default App;
-```
+  export default App;
+  ```
 
 ## Atomic
 
@@ -96,39 +94,39 @@ atomic 구조는 React 컴포넌트를 Atom(원자) 단위로 설계하는 구�
 
 HTML 태그 같은 label, input, button, link 등 가장 작은 단위의 컴포넌트
 
-[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcvZe2U%2FbtrtvrP2YqU%2F3xdbaaKaHnjE84ARkKw41K%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcvZe2U%2FbtrtvrP2YqU%2F3xdbaaKaHnjE84ARkKw41K%2Fimg.png)
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcvZe2U%2FbtrtvrP2YqU%2F3xdbaaKaHnjE84ARkKw41K%2Fimg.png" alt="Atoms">
 
 ### Molecule
 
 Atom을 여러개 조합한 컴포넌트
 
-[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzlU9u%2FbtrtwkbXyvW%2F5vuYIf0bNFlBDex9FY5J90%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzlU9u%2FbtrtwkbXyvW%2F5vuYIf0bNFlBDex9FY5J90%2Fimg.png)
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FzlU9u%2FbtrtwkbXyvW%2F5vuYIf0bNFlBDex9FY5J90%2Fimg.png" alt="Molecule">
 
 ### Organisms
 
 Molecule과 Atom들을 조합한 컴포넌트
 
-[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrdNmo%2FbtrtmghFhIW%2FUwiY4jxykdFUJcuee6vnr1%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrdNmo%2FbtrtmghFhIW%2FUwiY4jxykdFUJcuee6vnr1%2Fimg.png)
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FcrdNmo%2FbtrtmghFhIW%2FUwiY4jxykdFUJcuee6vnr1%2Fimg.png" alt = "Organisms">
 
 ### Templates
 
 컴포넌트들을 넣을 레이아웃 컴포넌트
 
-[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FeosFYE%2FbtrtsTFH2Xe%2FGUADEIzN702y8rGnwfU9Y0%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FeosFYE%2FbtrtsTFH2Xe%2FGUADEIzN702y8rGnwfU9Y0%2Fimg.png)
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FeosFYE%2FbtrtsTFH2Xe%2FGUADEIzN702y8rGnwfU9Y0%2Fimg.png" alt="Templates">
 
 ### Pages
 
 Template에 컴포넌트를 모두 주입한 컴포넌트
 
-[https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc8ZpcI%2Fbtrtq8XGpsa%2FtgmKB0gzltkMowbY6MNobK%2Fimg.png](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc8ZpcI%2Fbtrtq8XGpsa%2FtgmKB0gzltkMowbY6MNobK%2Fimg.png)
+<img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fc8ZpcI%2Fbtrtq8XGpsa%2FtgmKB0gzltkMowbY6MNobK%2Fimg.png" alt="Pages">
 
 # 어떤 방식을 택해야 좋은 것일까?
 
 ### 어떻게 나눠야 할까
 
-컴포넌트를 나눌 때는 state를 가지고 있냐 아니냐와 같이 기능적인 부분보다는 해당 컴포넌트가 어떤 ****\*\*****목적****\*\*****을 가지고 있는지에 집중하는 것이 좋다.
+컴포넌트를 나눌 때는 state를 가지고 있냐 아니냐와 같이 기능적인 부분보다는 해당 컴포넌트가 어떤 **목적**을 가지고 있는지에 집중하는 것이 좋다.
 
-- ex) ContextMenu 컴포넌트는 어떤 ****\*\*****동작****\*\*****을 수행하는 것이 목적이라기 보다, 어떻게 **보여지는가**가 목적이기 때문에 Presentation으로 분류하는 것이 좋다.
+- ex) ContextMenu 컴포넌트는 어떤 **동작- **을 수행하는 것이 목적이라기 보다, 어떻게 **보여지는가**가 목적이기 때문에 Presentation으로 분류하는 것이 좋다.
 
 ### 오해
 
