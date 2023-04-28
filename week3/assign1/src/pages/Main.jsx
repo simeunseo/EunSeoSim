@@ -1,6 +1,9 @@
 import Button from "../components/Button";
+import Cards from "../components/Cards";
 import Header from "../components/Header";
+import { getCardArr } from "../utils/GetCardArr";
 import styled from "styled-components";
+
 const Main = () => {
   return (
     <>
@@ -13,6 +16,10 @@ const Main = () => {
         </div>
         <Button>리셋</Button>
       </ButtonContainer>
+
+      {getCardArr(3).map((imgIdx, idx) => (
+        <Cards idx={imgIdx} key={idx}></Cards>
+      ))}
     </>
   );
 };
