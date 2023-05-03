@@ -1,12 +1,14 @@
+import { LevelContext, ScoreDispatchContext } from "../context/context";
 import { useContext, useMemo, useState } from "react";
 
 import Card from "./Card";
-import { LevelContext } from "../context/context";
 import { getCardArr } from "../utils/GetCardArr";
 import styled from "styled-components";
 
 const Cards = () => {
   const levelType = useContext(LevelContext);
+
+  const scoreDispatch = useContext(ScoreDispatchContext);
 
   //levelType이 변경되지 않는한, cardAllList는 바꾸지 말아줘!!!
   const cardAllList = useMemo(() => {
@@ -26,17 +28,18 @@ const Cards = () => {
         tempCompareList.push({ pk, imgId });
         // compareList에 삽입
         setCompareList(tempCompareList);
-        console.log("첫 선택", pk, imgId);
+
         break;
       case 1: // 두번째 선택
         tempCompareList = [...compareList];
         tempCompareList.push({ pk, imgId });
         // compareList에 삽입
         setCompareList(tempCompareList);
-        console.log("두번째 선택", pk, imgId);
+
         // 두번째 선택이 첫번째 선택과 같은 카드일 경우
         if (compareList[0].imgId === imgId) {
-          console.log("정답~");
+          scoreDispatch({ type: "INCREASE" }); // 점수 올리기
+
           tempPairedList = [...pairedList];
 
           // compareList의 요소들을 pairedList로 옮긴다

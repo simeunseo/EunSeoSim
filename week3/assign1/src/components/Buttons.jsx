@@ -1,5 +1,6 @@
 import { LevelContext, LevelDispatchContext } from "../context/context";
 
+import { ScoreContext } from "../context/context";
 import styled from "styled-components";
 import { useContext } from "react";
 
@@ -38,11 +39,18 @@ const LevelButtons = () => {
   );
 };
 
+const Score = () => {
+  const score = useContext(ScoreContext);
+
+  return <div>{score}</div>;
+};
+
 const Buttons = () => {
   return (
     <>
       <ButtonContainer>
         <LevelButtons />
+        <Score />
         <ResetButton />
       </ButtonContainer>
     </>

@@ -5,7 +5,7 @@ import Header from "../components/Header";
 const Main = () => {
   return (
     <GlobalContextProvider>
-      <Header></Header>
+      <Header />
       <Cards />
     </GlobalContextProvider>
   );
