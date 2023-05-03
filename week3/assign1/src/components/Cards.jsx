@@ -8,6 +8,7 @@ const Card = ({ imgId }) => {
 
 const Cards = () => {
   const levelType = useContext(LevelContext);
+
   return (
     <>
       {getCardArr(levelType).map((imgId, idx) => (

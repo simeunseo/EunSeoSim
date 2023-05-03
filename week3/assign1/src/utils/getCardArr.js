@@ -84,5 +84,8 @@ export const getCardArr = (level) => {
     case "hard":
       randomIdxArr = makeCardDeck(getRandomIdx(totalLength, 9));
       return randomIdxArr;
+    default:
+      randomIdxArr = makeCardDeck(getRandomIdx(totalLength, 5));
+      return randomIdxArr;
   }
 };

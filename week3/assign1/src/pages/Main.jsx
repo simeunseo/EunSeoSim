@@ -1,3 +1,4 @@
+import Buttons from "../components/Buttons";
 import Cards from "../components/Cards";
 import { GlobalContextProvider } from "../context/context";
 import Header from "../components/Header";
@@ -8,19 +9,10 @@ const Main = () => {
   return (
     <GlobalContextProvider>
       <Header></Header>
-      <ButtonContainer>
-        <LevelButtons></LevelButtons>
-      </ButtonContainer>
+      <Buttons />
       <Cards></Cards>
     </GlobalContextProvider>
   );
 };
-
-const ButtonContainer = styled.section`
-  width: 100vw;
-
-  display: flex;
-  justify-content: space-between;
-`;
 
 export default Main;

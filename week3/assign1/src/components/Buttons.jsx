@@ -3,11 +3,17 @@ import { LevelContext, LevelDispatchContext } from "../context/context";
 import styled from "styled-components";
 import { useContext } from "react";
 
-export const Button = (props) => {
-  const levelType = useContext(LevelContext);
+const Button = (props) => {
   const levelDispatch = useContext(LevelDispatchContext);
+  const levelType = useContext(LevelContext);
 
-  return (
+  return props.value === "reset" ? (
+    // TODO : reset 기능 처리
+    <StyledButton
+      onClick={() => levelDispatch({ type: levelType })}
+      type="button"
+    ></StyledButton>
+  ) : (
     <StyledButton
       onClick={(e) => levelDispatch({ type: e.target.value })}
       value={props.value}
@@ -18,17 +24,32 @@ export const Button = (props) => {
   );
 };
 
+const ResetButton = () => {
+  return <Button>리셋</Button>;
+};
+
 const LevelButtons = () => {
   return (
-    <>
+    <section>
       <Button value="easy">이지</Button>
       <Button value="normal">노말</Button>
       <Button value="hard">하드</Button>
+    </section>
+  );
+};
+
+const Buttons = () => {
+  return (
+    <>
+      <ButtonContainer>
+        <LevelButtons />
+        <ResetButton />
+      </ButtonContainer>
     </>
   );
 };
 
-export default LevelButtons;
+export default Buttons;
 
 const StyledButton = styled.button`
   border: 0.3rem double black;
@@ -39,4 +60,11 @@ const StyledButton = styled.button`
   margin: 1rem;
 
   cursor: pointer;
+`;
+
+const ButtonContainer = styled.section`
+  width: 100vw;
+
+  display: flex;
+  justify-content: space-between;
 `;
