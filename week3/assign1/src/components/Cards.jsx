@@ -1,11 +1,12 @@
 import { LevelContext, ScoreDispatchContext } from "../context/context";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 
 import Card from "./Card";
 import { getCardArr } from "../utils/GetCardArr";
 import styled from "styled-components";
 
-const Cards = () => {
+const Cards = (props) => {
+  const { compareList, setCompareList, pairedList, setPairedList } = props;
   const levelType = useContext(LevelContext);
 
   const scoreDispatch = useContext(ScoreDispatchContext);
@@ -15,9 +16,6 @@ const Cards = () => {
     const cardAllList = getCardArr(levelType);
     return cardAllList;
   }, [levelType]);
-
-  const [compareList, setCompareList] = useState([]); // 비교 대상인 카드의 {pk, imgId}를 저장
-  const [pairedList, setPairedList] = useState([]); // 짝을 맞춘 카드의 {pk, imgId}를 저장
 
   const clickHandler = (pk, imgId) => {
     let tempCompareList = [];

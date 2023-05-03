@@ -5,19 +5,27 @@ import styled from "styled-components";
 import { useContext } from "react";
 
 const Button = (props) => {
+  const { setCompareList, setPairedList, value } = props;
   const levelDispatch = useContext(LevelDispatchContext);
   const levelType = useContext(LevelContext);
 
   return props.value === "reset" ? (
     // TODO : reset 기능 처리
     <StyledButton
-      onClick={() => levelDispatch({ type: levelType })}
+      onClick={() => {
+        setCompareList([]);
+        setPairedList([]);
+      }}
       type="button"
     ></StyledButton>
   ) : (
     <StyledButton
-      onClick={(e) => levelDispatch({ type: e.target.value })}
-      value={props.value}
+      onClick={(e) => {
+        setCompareList([]);
+        setPairedList([]);
+        levelDispatch({ type: e.target.value });
+      }}
+      value={value}
       type="button"
     >
       {props.children}
@@ -29,12 +37,31 @@ const ResetButton = () => {
   return <Button>리셋</Button>;
 };
 
-const LevelButtons = () => {
+const LevelButtons = (props) => {
+  const { setCompareList, setPairedList } = props;
   return (
     <section>
-      <Button value="easy">이지</Button>
-      <Button value="normal">노말</Button>
-      <Button value="hard">하드</Button>
+      <Button
+        setCompareList={setCompareList}
+        setPairedList={setPairedList}
+        value="easy"
+      >
+        이지
+      </Button>
+      <Button
+        setCompareList={setCompareList}
+        setPairedList={setPairedList}
+        value="normal"
+      >
+        노말
+      </Button>
+      <Button
+        setCompareList={setCompareList}
+        setPairedList={setPairedList}
+        value="hard"
+      >
+        하드
+      </Button>
     </section>
   );
 };
@@ -63,14 +90,22 @@ const Score = () => {
   );
 };
 
-const Buttons = () => {
+const Buttons = (props) => {
+  const { setCompareList, setPairedList } = props;
+
   return (
     <>
       <ButtonContainer>
-        <LevelButtons />
+        <LevelButtons
+          setCompareList={setCompareList}
+          setPairedList={setPairedList}
+        />
         <RightGroupWrapper>
           <Score />
-          <ResetButton />
+          <ResetButton
+            setCompareList={setCompareList}
+            setPairedList={setPairedList}
+          />
         </RightGroupWrapper>
       </ButtonContainer>
     </>

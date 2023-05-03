@@ -2,11 +2,15 @@ import Buttons from "./Buttons";
 import headerImage from "../assets/pageImages/header.png";
 import styled from "styled-components";
 
-const Header = () => {
+const Header = (props) => {
+  const { setCompareList, setPairedList } = props;
   return (
     <>
       <HeaderContainer src={headerImage}></HeaderContainer>
-      <Buttons></Buttons>
+      <Buttons
+        setCompareList={setCompareList}
+        setPairedList={setPairedList}
+      ></Buttons>
     </>
   );
 };
