@@ -75,13 +75,13 @@ export const getCardArr = (level) => {
   let randomIdxArr = [];
   let totalLength = allImageArr.length;
   switch (level) {
-    case 1:
+    case "easy":
       randomIdxArr = makeCardDeck(getRandomIdx(totalLength, 5));
       return randomIdxArr;
-    case 2:
+    case "normal":
       randomIdxArr = makeCardDeck(getRandomIdx(totalLength, 7));
       return randomIdxArr;
-    case 3:
+    case "hard":
       randomIdxArr = makeCardDeck(getRandomIdx(totalLength, 9));
       return randomIdxArr;
   }

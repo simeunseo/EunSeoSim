@@ -1,26 +1,18 @@
-import Button from "../components/Button";
 import Cards from "../components/Cards";
+import { GlobalContextProvider } from "../context/context";
 import Header from "../components/Header";
-import { getCardArr } from "../utils/GetCardArr";
+import LevelButtons from "../components/Buttons";
 import styled from "styled-components";
 
 const Main = () => {
   return (
-    <>
+    <GlobalContextProvider>
       <Header></Header>
       <ButtonContainer>
-        <div>
-          <Button>초수</Button>
-          <Button>중수</Button>
-          <Button>고수</Button>
-        </div>
-        <Button>리셋</Button>
+        <LevelButtons></LevelButtons>
       </ButtonContainer>
-
-      {getCardArr(3).map((imgIdx, idx) => (
-        <Cards idx={imgIdx} key={idx}></Cards>
-      ))}
-    </>
+      <Cards></Cards>
+    </GlobalContextProvider>
   );
 };
 
