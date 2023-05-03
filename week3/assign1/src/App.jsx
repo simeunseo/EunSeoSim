@@ -19,5 +19,5 @@ export default App;
 const Background = styled.div`
   background-image: url(${backgroundImage});
 
-  height: 100vh;
+  height: min-content;
 `;
