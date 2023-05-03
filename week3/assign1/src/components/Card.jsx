@@ -2,17 +2,21 @@ import { allImageArr } from "../utils/GetCardArr";
 import styled from "styled-components";
 
 const Card = (props) => {
-  const { imgId, clickHandler, compareList, pk } = props;
+  const { imgId, clickHandler, compareList, pairedList, pk } = props;
 
-  //이 카드가 클릭된 카드인지 여부
-  const isClicked = compareList.some((item) => {
+  //이 카드가 비교되고 있는 카드인지 여부
+  const isComparing = compareList.some((item) => {
+    if (item.pk === pk) return true;
+  });
+
+  const isPaired = pairedList.some((item) => {
     if (item.pk === pk) return true;
   });
 
   return (
     <StyledCardWrapper>
       <div className="pair">
-        <div className={`card ${isClicked ? "flipped" : ""}`}>
+        <div className={`card ${isComparing || isPaired ? "flipped" : ""}`}>
           <div className="card__back">
             <StyledCard src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/220px-Pokebola-pokeball-png-0.png"></StyledCard>
           </div>

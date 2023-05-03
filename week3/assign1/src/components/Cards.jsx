@@ -14,29 +14,47 @@ const Cards = () => {
     return cardAllList;
   }, [levelType]);
 
-  const [compareList, setCompareList] = useState([]); // 비교 대상인 카드의 pk를 저장
-  const [pairedList, setPairedList] = useState([]); // 짝을 맞춘 카드의 imgId를 저장
+  const [compareList, setCompareList] = useState([]); // 비교 대상인 카드의 {pk, imgId}를 저장
+  const [pairedList, setPairedList] = useState([]); // 짝을 맞춘 카드의 {pk, imgId}를 저장
 
   const clickHandler = (pk, imgId) => {
     let tempCompareList = [];
+    let tempPairedList = [];
     switch (compareList.length) {
       case 0: // 첫번째 선택
         tempCompareList = [...compareList];
         tempCompareList.push({ pk, imgId });
+        // compareList에 삽입
         setCompareList(tempCompareList);
         console.log("첫 선택", pk, imgId);
         break;
-      case 1: //두번째 선택
+      case 1: // 두번째 선택
         tempCompareList = [...compareList];
         tempCompareList.push({ pk, imgId });
+        // compareList에 삽입
         setCompareList(tempCompareList);
         console.log("두번째 선택", pk, imgId);
+        // 두번째 선택이 첫번째 선택과 같은 카드일 경우
         if (compareList[0].imgId === imgId) {
           console.log("정답~");
+          tempPairedList = [...pairedList];
+
+          // compareList의 요소들을 pairedList로 옮긴다
+          tempCompareList.forEach((item) => {
+            const pk = item.pk;
+            const imgId = item.imgId;
+            tempPairedList.push({ pk, imgId });
+          });
+          setPairedList(tempPairedList);
+
+          // compairList 초기화
+          setCompareList([]);
+        } else {
+          //오답
+          setCompareList([]);
         }
         break;
     }
-    console.log(compareList);
   };
 
   return (
@@ -48,6 +66,7 @@ const Cards = () => {
           pk={idx}
           clickHandler={clickHandler}
           compareList={compareList}
+          pairedList={pairedList}
         ></Card>
       ))}
     </CardWrapper>
