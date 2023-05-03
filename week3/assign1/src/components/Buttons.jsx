@@ -54,12 +54,21 @@ export default Buttons;
 const StyledButton = styled.button`
   border: 0.3rem double black;
 
+  background-color: #e7e7e7;
+
   font-size: 1rem;
 
   padding: 0.5rem 1rem;
   margin: 1rem;
 
   cursor: pointer;
+
+  &:hover {
+    border: 0.3rem double #e7e7e7;
+
+    background-color: black;
+    color: #e7e7e7;
+  }
 `;
 
 const ButtonContainer = styled.section`
