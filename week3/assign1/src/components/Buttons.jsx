@@ -40,9 +40,27 @@ const LevelButtons = () => {
 };
 
 const Score = () => {
+  const levelType = useContext(LevelContext);
+  const goal = () => {
+    switch (levelType) {
+      case "easy":
+        return 5;
+      case "normal":
+        return 7;
+      case "hard":
+        return 9;
+      default:
+        return 5;
+    }
+  };
+
   const score = useContext(ScoreContext);
 
-  return <div>{score}</div>;
+  return (
+    <StyledScore>
+      당신의 점수! {score} / {goal()}
+    </StyledScore>
+  );
 };
 
 const Buttons = () => {
@@ -50,14 +68,28 @@ const Buttons = () => {
     <>
       <ButtonContainer>
         <LevelButtons />
-        <Score />
-        <ResetButton />
+        <RightGroupWrapper>
+          <Score />
+          <ResetButton />
+        </RightGroupWrapper>
       </ButtonContainer>
     </>
   );
 };
 
 export default Buttons;
+
+const RightGroupWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const StyledScore = styled.span`
+  font-family: "DOSSaemmul"; //이건 왜 따로 적용을 해야되는거지?
+  font-size: 1.5rem;
+
+  margin-right: 1rem;
+`;
 
 const StyledButton = styled.button`
   border: 0.3rem double black;
