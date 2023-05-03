@@ -4,6 +4,7 @@ import { useContext, useMemo } from "react";
 import Card from "./Card";
 import { getCardArr } from "../utils/GetCardArr";
 import styled from "styled-components";
+import { useEffect } from "react";
 
 const Cards = (props) => {
   const { compareList, setCompareList, pairedList, setPairedList } = props;
@@ -12,8 +13,8 @@ const Cards = (props) => {
   const scoreDispatch = useContext(ScoreDispatchContext);
 
   //levelType이 변경되지 않는한, cardAllList는 바꾸지 말아줘!!!
-  const cardAllList = useMemo(() => {
-    const cardAllList = getCardArr(levelType);
+  let cardAllList = useMemo(() => {
+    let cardAllList = getCardArr(levelType);
     return cardAllList;
   }, [levelType]);
 

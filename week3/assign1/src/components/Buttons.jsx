@@ -17,7 +17,9 @@ const Button = (props) => {
         setPairedList([]);
       }}
       type="button"
-    ></StyledButton>
+    >
+      {props.children}
+    </StyledButton>
   ) : (
     <StyledButton
       onClick={(e) => {
@@ -33,8 +35,17 @@ const Button = (props) => {
   );
 };
 
-const ResetButton = () => {
-  return <Button>리셋</Button>;
+const ResetButton = (props) => {
+  const { setCompareList, setPairedList } = props;
+  return (
+    <Button
+      setCompareList={setCompareList}
+      setPairedList={setPairedList}
+      value="reset"
+    >
+      리셋
+    </Button>
+  );
 };
 
 const LevelButtons = (props) => {
