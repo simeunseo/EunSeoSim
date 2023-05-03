@@ -18,12 +18,12 @@ const Card = (props) => {
       <div className="pair">
         <div className={`card ${isComparing || isPaired ? "flipped" : ""}`}>
           <div className="card__back">
-            <StyledCard src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/220px-Pokebola-pokeball-png-0.png"></StyledCard>
+            <StyledCard src={allImageArr[imgId]}></StyledCard>
           </div>
           <div className="card__front">
             <StyledCard
-              src={allImageArr[imgId]}
               onClick={() => clickHandler(pk, imgId)}
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/220px-Pokebola-pokeball-png-0.png"
             ></StyledCard>
           </div>
         </div>

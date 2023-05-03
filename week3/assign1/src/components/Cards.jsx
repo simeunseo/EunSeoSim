@@ -50,8 +50,10 @@ const Cards = () => {
           // compairList 초기화
           setCompareList([]);
         } else {
-          //오답
-          setCompareList([]);
+          // 오답
+          setTimeout(() => {
+            setCompareList([]);
+          }, 1000);
         }
         break;
     }
