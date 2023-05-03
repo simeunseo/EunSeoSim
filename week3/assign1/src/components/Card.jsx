@@ -2,16 +2,25 @@ import { allImageArr } from "../utils/GetCardArr";
 import styled from "styled-components";
 
 const Card = (props) => {
-  const { imgId } = props;
+  const { imgId, clickHandler, compareList, pk } = props;
+
+  //이 카드가 클릭된 카드인지 여부
+  const isClicked = compareList.some((item) => {
+    if (item.pk === pk) return true;
+  });
+
   return (
     <StyledCardWrapper>
-      <div className="flip">
-        <div className="card">
+      <div className="pair">
+        <div className={`card ${isClicked ? "flipped" : ""}`}>
           <div className="card__back">
             <StyledCard src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/220px-Pokebola-pokeball-png-0.png"></StyledCard>
           </div>
           <div className="card__front">
-            <StyledCard src={allImageArr[imgId]}></StyledCard>
+            <StyledCard
+              src={allImageArr[imgId]}
+              onClick={() => clickHandler(pk, imgId)}
+            ></StyledCard>
           </div>
         </div>
       </div>
@@ -20,7 +29,7 @@ const Card = (props) => {
 };
 
 const StyledCardWrapper = styled.article`
-  .flip {
+  .pair {
     width: 13rem;
     height: 12.5rem;
   }
@@ -37,16 +46,17 @@ const StyledCardWrapper = styled.article`
     position: absolute;
     width: 100%;
     height: 100%;
-    backface-visibility: hidden;
+    backface-visibility: hidden; //요소의 뒷면을 보여줄지를 결정한다
   }
 
-  //뒷면은 먼저 보이게 뒤집어 놓는다
+  //뒷면은 먼저 뒤집어 놓는다
+  //요소를 Y축을 기준으로 회전시킨다.
   .card__back {
     transform: rotateY(180deg);
   }
 
-  .flip:hover .card {
-    transform: rotateY(180deg);
+  .flipped {
+    transform: rotateY(180deg); //앞면과 뒷면을 한번에 뒤집는다
   }
 `;
 
