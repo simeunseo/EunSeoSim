@@ -1,4 +1,4 @@
-import { allImageArr } from "../utils/GetCardArr";
+import { allImageArr } from "../utils/getCardArr";
 import cardBackImage from "../assets/pageImages/card-back.png";
 import styled from "styled-components";
 
