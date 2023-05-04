@@ -2,7 +2,7 @@ import { LevelContext, ScoreDispatchContext } from "../context/context";
 import { useContext, useMemo } from "react";
 
 import Card from "./Card";
-import { GetCardArr } from "../utils/getCardArr.js";
+import { getCardArr } from "../utils/getCardArr.js";
 import styled from "styled-components";
 import { useEffect } from "react";
 
@@ -21,7 +21,7 @@ const Cards = (props) => {
 
   //levelType이 변경되지 않는한, cardAllList는 바꾸지 말아줘!!!
   const tempCardAllList = useMemo(() => {
-    const tempCardAllList = GetCardArr(levelType);
+    const tempCardAllList = getCardArr(levelType);
     return tempCardAllList;
   }, [levelType]);
 
