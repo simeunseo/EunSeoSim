@@ -26,7 +26,10 @@ const Cards = (props) => {
   }, [levelType]);
 
   useEffect(() => {
-    setCardAllList(tempCardAllList);
+    // 카드가 뒤집어지는 잠깐의 시간동안 새로 달라진 카드가 노출되지 않게 하기 위해, 카드 목록이 바뀔 때까지 약간의 딜레이를 준다.
+    setTimeout(() => {
+      setCardAllList(tempCardAllList);
+    }, 300);
   }, [tempCardAllList, setCardAllList]);
 
   const clickHandler = (pk, imgId) => {
@@ -66,7 +69,7 @@ const Cards = (props) => {
           // 오답
           setTimeout(() => {
             setCompareList([]);
-          }, 1000);
+          }, 800);
         }
         break;
     }

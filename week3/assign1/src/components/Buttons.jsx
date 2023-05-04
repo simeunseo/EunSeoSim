@@ -14,13 +14,15 @@ const Button = (props) => {
   const scoreDispatch = useContext(ScoreDispatchContext);
 
   return props.value === "reset" ? (
-    // TODO : reset 기능 처리
     <StyledButton
       onClick={() => {
         setCompareList([]);
         setPairedList([]);
         scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
-        setCardAllList(getCardArr(levelType));
+        // 카드가 뒤집어지는 잠깐의 시간동안 새로 달라진 카드가 노출되지 않게 하기 위해, 카드 목록이 바뀔 때까지 약간의 딜레이를 준다.
+        setTimeout(() => {
+          setCardAllList(getCardArr(levelType));
+        }, 800);
       }}
       type="button"
     >
