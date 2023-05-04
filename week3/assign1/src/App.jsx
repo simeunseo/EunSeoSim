@@ -1,5 +1,3 @@
-import "./App.css";
-
 import GlobalStyle from "./styles/globalStyles";
 import Main from "./pages/Main";
 import { ThemeProvider } from "styled-components";

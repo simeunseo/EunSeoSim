@@ -1,12 +1,15 @@
 import { LevelContext, LevelDispatchContext } from "../context/context";
 
+import ModalPortal from "./ModalPortal";
 import { ScoreContext } from "../context/context";
 import { ScoreDispatchContext } from "../context/context";
+import SuccessModal from "./SuccessModal";
 import { getCardArr } from "../utils/GetCardArr";
 import styled from "styled-components";
 import usdDidMountEffet from "../hooks/useDidMountEffect";
 import { useContext } from "react";
 import { useRef } from "react";
+import { useState } from "react";
 
 const Button = (props) => {
   const { setCompareList, setPairedList, setCardAllList, value } = props;
@@ -90,6 +93,7 @@ const LevelButtons = (props) => {
 };
 
 const Score = () => {
+  const [modalOpen, setModalOpen] = useState(false);
   const animationScore = useRef();
   const levelType = useContext(LevelContext);
   const goal = () => {
@@ -110,21 +114,35 @@ const Score = () => {
   // 첫 렌더링 때는 useEffect를 적용하지 않도록 custom hook을 사용함!
   // 레퍼런스 : https://seokd.tistory.com/8
   usdDidMountEffet(() => {
+    // score가 변경되면 animation 이라는 class를 추가함
     animationScore.current.classList.toggle("animation");
     setTimeout(() => {
       animationScore.current.classList.toggle("animation");
     }, 500);
+
+    console.log(score, goal());
+    if (score === goal()) {
+      console.log("성공");
+      setModalOpen(true);
+    }
   }, [score]);
 
   return (
-    <StyledScore>
-      <span className="explainText">당신의 점수!</span>
-      <span className="scoreText" ref={animationScore}>
-        {" "}
-        {score}{" "}
-      </span>
-      <span className="scoreGoal">/ {goal()}</span>
-    </StyledScore>
+    <>
+      {modalOpen && (
+        <ModalPortal>
+          <SuccessModal onClose={() => setModalOpen(false)} />
+        </ModalPortal>
+      )}
+      <StyledScore>
+        <span className="explainText">당신의 점수!</span>
+        <span className="scoreText" ref={animationScore}>
+          {" "}
+          {score}{" "}
+        </span>
+        <span className="scoreGoal">/ {goal()}</span>
+      </StyledScore>
+    </>
   );
 };
 

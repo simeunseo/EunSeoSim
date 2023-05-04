@@ -3,6 +3,8 @@ const colors = {
   white: "#FFFFFF",
   grey: "#e7e7e7",
   red: "#ff1800",
+  lemon: "#fdffbc",
+  overlay: "#00000066",
 };
 
 const theme = {
