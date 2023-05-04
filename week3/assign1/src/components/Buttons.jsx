@@ -6,7 +6,6 @@ import { getCardArr } from "../utils/GetCardArr";
 import styled from "styled-components";
 import usdDidMountEffet from "../hooks/useDidMountEffect";
 import { useContext } from "react";
-import { useEffect } from "react";
 import { useRef } from "react";
 
 const Button = (props) => {
@@ -182,7 +181,8 @@ const StyledScore = styled.span`
   }
   .animation {
     animation: bounce 0.5s infinite;
-    color: red;
+
+    color: ${({ theme }) => theme.colors.red};
   }
   font-family: "DOSSaemmul"; //이건 왜 따로 적용을 해야되는거지?
   font-size: 1.5rem;
@@ -191,9 +191,9 @@ const StyledScore = styled.span`
 `;
 
 const StyledButton = styled.button`
-  border: 0.3rem double black;
+  border: 0.3rem double ${({ theme }) => theme.colors.black};
 
-  background-color: #e7e7e7;
+  background-color: ${({ theme }) => theme.colors.grey};
 
   font-size: 1rem;
 
@@ -203,10 +203,10 @@ const StyledButton = styled.button`
   cursor: pointer;
 
   &:hover {
-    border: 0.3rem double #e7e7e7;
+    border: 0.3rem double ${({ theme }) => theme.colors.grey};
 
-    background-color: black;
-    color: #e7e7e7;
+    background-color: ${({ theme }) => theme.colors.black};
+    color: ${({ theme }) => theme.colors.grey};
   }
 `;
 

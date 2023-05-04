@@ -23,5 +23,5 @@ const HeaderContainer = styled.img`
   width: 100vw;
   text-align: center;
 
-  border-bottom: 0.3rem double black;
+  border-bottom: 0.3rem double ${({ theme }) => theme.colors.black};
 `;

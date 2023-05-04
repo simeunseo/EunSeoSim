@@ -71,7 +71,7 @@ const StyledCardWrapper = styled.article`
   }
 
   .card__front > img {
-    background-color: white;
+    background-color: ${({ theme }) => theme.colors.white};
   }
 
   .flipped {
@@ -80,9 +80,9 @@ const StyledCardWrapper = styled.article`
 `;
 
 const StyledCard = styled.img`
-  border: 0.3rem double black;
+  border: 0.3rem double ${({ theme }) => theme.colors.black};
 
-  background-color: #e7e7e7;
+  background-color: ${({ theme }) => theme.colors.grey};
 
   padding: 1.5rem;
   margin: 1rem;
