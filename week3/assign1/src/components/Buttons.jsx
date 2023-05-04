@@ -4,7 +4,7 @@ import ModalPortal from "./ModalPortal";
 import { ScoreContext } from "../context/context";
 import { ScoreDispatchContext } from "../context/context";
 import SuccessModal from "./SuccessModal";
-import { getCardArr } from "../utils/GetCardArr";
+import { getCardArr } from "../utils/getCardArr";
 import styled from "styled-components";
 import usdDidMountEffet from "../hooks/useDidMountEffect";
 import { useContext } from "react";
