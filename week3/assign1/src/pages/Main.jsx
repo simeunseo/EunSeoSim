@@ -1,3 +1,4 @@
+import BGM from "../assets/bgm.mp3";
 import Cards from "../components/Cards";
 import { GlobalContextProvider } from "../context/context";
 import Header from "../components/Header";
@@ -10,6 +11,14 @@ const Main = () => {
 
   return (
     <GlobalContextProvider>
+      <audio
+        autoPlay
+        onLoadStart={(e) => {
+          e.target.volume = 0.01;
+        }}
+      >
+        <source src={BGM} type="audio/mp3" />
+      </audio>
       <Header
         compareList={compareList}
         setCompareList={setCompareList}
