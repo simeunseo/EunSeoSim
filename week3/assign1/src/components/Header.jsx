@@ -3,13 +3,15 @@ import headerImage from "../assets/pageImages/header.png";
 import styled from "styled-components";
 
 const Header = (props) => {
-  const { setCompareList, setPairedList } = props;
+  const { setCompareList, setPairedList, cardAllList, setCardAllList } = props;
   return (
     <>
       <HeaderContainer src={headerImage}></HeaderContainer>
       <Buttons
         setCompareList={setCompareList}
         setPairedList={setPairedList}
+        cardAllList={cardAllList}
+        setCardAllList={setCardAllList}
       ></Buttons>
     </>
   );

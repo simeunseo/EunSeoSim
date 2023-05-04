@@ -27,6 +27,8 @@ function scoreReducer(state, action) {
   switch (action.type) {
     case "INCREASE":
       return state + 1;
+    case "INITIALIZE":
+      return 0;
   }
 }
 

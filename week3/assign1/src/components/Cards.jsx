@@ -7,16 +7,27 @@ import styled from "styled-components";
 import { useEffect } from "react";
 
 const Cards = (props) => {
-  const { compareList, setCompareList, pairedList, setPairedList } = props;
+  const {
+    compareList,
+    setCompareList,
+    pairedList,
+    setPairedList,
+    cardAllList,
+    setCardAllList,
+  } = props;
   const levelType = useContext(LevelContext);
 
   const scoreDispatch = useContext(ScoreDispatchContext);
 
   //levelType이 변경되지 않는한, cardAllList는 바꾸지 말아줘!!!
-  let cardAllList = useMemo(() => {
-    let cardAllList = getCardArr(levelType);
-    return cardAllList;
+  const tempCardAllList = useMemo(() => {
+    const tempCardAllList = getCardArr(levelType);
+    return tempCardAllList;
   }, [levelType]);
+
+  useEffect(() => {
+    setCardAllList(tempCardAllList);
+  }, [tempCardAllList, setCardAllList]);
 
   const clickHandler = (pk, imgId) => {
     let tempCompareList = [];

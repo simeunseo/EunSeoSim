@@ -1,13 +1,17 @@
 import { LevelContext, LevelDispatchContext } from "../context/context";
 
 import { ScoreContext } from "../context/context";
+import { ScoreDispatchContext } from "../context/context";
+import { getCardArr } from "../utils/GetCardArr";
 import styled from "styled-components";
 import { useContext } from "react";
 
 const Button = (props) => {
-  const { setCompareList, setPairedList, value } = props;
+  const { setCompareList, setPairedList, setCardAllList, value } = props;
   const levelDispatch = useContext(LevelDispatchContext);
   const levelType = useContext(LevelContext);
+
+  const scoreDispatch = useContext(ScoreDispatchContext);
 
   return props.value === "reset" ? (
     // TODO : reset 기능 처리
@@ -15,6 +19,8 @@ const Button = (props) => {
       onClick={() => {
         setCompareList([]);
         setPairedList([]);
+        scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
+        setCardAllList(getCardArr(levelType));
       }}
       type="button"
     >
@@ -25,6 +31,7 @@ const Button = (props) => {
       onClick={(e) => {
         setCompareList([]);
         setPairedList([]);
+        scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
         levelDispatch({ type: e.target.value });
       }}
       value={value}
@@ -36,11 +43,12 @@ const Button = (props) => {
 };
 
 const ResetButton = (props) => {
-  const { setCompareList, setPairedList } = props;
+  const { setCompareList, setPairedList, setCardAllList } = props;
   return (
     <Button
       setCompareList={setCompareList}
       setPairedList={setPairedList}
+      setCardAllList={setCardAllList}
       value="reset"
     >
       리셋
@@ -102,7 +110,7 @@ const Score = () => {
 };
 
 const Buttons = (props) => {
-  const { setCompareList, setPairedList } = props;
+  const { setCompareList, setPairedList, setCardAllList } = props;
 
   return (
     <>
@@ -116,6 +124,7 @@ const Buttons = (props) => {
           <ResetButton
             setCompareList={setCompareList}
             setPairedList={setPairedList}
+            setCardAllList={setCardAllList}
           />
         </RightGroupWrapper>
       </ButtonContainer>

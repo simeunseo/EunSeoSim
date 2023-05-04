@@ -1,4 +1,5 @@
 import { allImageArr } from "../utils/GetCardArr";
+import cardBackImage from "../assets/pageImages/card-back.png";
 import styled from "styled-components";
 
 const Card = (props) => {
@@ -23,7 +24,7 @@ const Card = (props) => {
           <div className="card__front">
             <StyledCard
               onClick={() => clickHandler(pk, imgId)}
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Pokebola-pokeball-png-0.png/220px-Pokebola-pokeball-png-0.png"
+              src={cardBackImage}
             ></StyledCard>
           </div>
         </div>
