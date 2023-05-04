@@ -4,7 +4,10 @@ import { ScoreContext } from "../context/context";
 import { ScoreDispatchContext } from "../context/context";
 import { getCardArr } from "../utils/GetCardArr";
 import styled from "styled-components";
+import usdDidMountEffet from "../hooks/useDidMountEffect";
 import { useContext } from "react";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 const Button = (props) => {
   const { setCompareList, setPairedList, setCardAllList, value } = props;
@@ -88,6 +91,7 @@ const LevelButtons = (props) => {
 };
 
 const Score = () => {
+  const animationScore = useRef();
   const levelType = useContext(LevelContext);
   const goal = () => {
     switch (levelType) {
@@ -104,9 +108,23 @@ const Score = () => {
 
   const score = useContext(ScoreContext);
 
+  // 첫 렌더링 때는 useEffect를 적용하지 않도록 custom hook을 사용함!
+  // 레퍼런스 : https://seokd.tistory.com/8
+  usdDidMountEffet(() => {
+    animationScore.current.classList.toggle("animation");
+    setTimeout(() => {
+      animationScore.current.classList.toggle("animation");
+    }, 500);
+  }, [score]);
+
   return (
     <StyledScore>
-      당신의 점수! {score} / {goal()}
+      <span className="explainText">당신의 점수!</span>
+      <span className="scoreText" ref={animationScore}>
+        {" "}
+        {score}{" "}
+      </span>
+      <span className="scoreGoal">/ {goal()}</span>
     </StyledScore>
   );
 };
@@ -142,6 +160,30 @@ const RightGroupWrapper = styled.div`
 `;
 
 const StyledScore = styled.span`
+  .explainText {
+    margin-right: 1.5rem;
+  }
+  .scoreGoal {
+    margin-left: 1.7rem;
+  }
+  .scoreText {
+    position: absolute;
+  }
+  @keyframes bounce {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2rem);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  .animation {
+    animation: bounce 0.5s infinite;
+    color: red;
+  }
   font-family: "DOSSaemmul"; //이건 왜 따로 적용을 해야되는거지?
   font-size: 1.5rem;
 
