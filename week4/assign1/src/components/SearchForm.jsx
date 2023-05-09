@@ -1,7 +1,7 @@
 import React from "react";
 import useForm from "../hooks/useForm";
 import { useNavigate } from "react-router-dom";
-const SearchForm = (props) => {
+const SearchForm = () => {
   const navigate = useNavigate();
   const { values, errors, submitting, handleChange, handleSubmit } = useForm({
     initialValues: { type: "week", area: "" },

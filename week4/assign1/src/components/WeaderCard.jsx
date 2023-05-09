@@ -1,8 +1,11 @@
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
-const WeaderCard = () => {
+const WeaderCard = (props) => {
+  const test = useParams();
+  console.log(test);
+
   const getWeaderInfo = () => {
-    const area = "bucheon";
     fetch(
       `https://api.openweathermap.org/data/2.5/weather?q=${area}&appid=${
         import.meta.env.VITE_APP_WEATHER
@@ -10,9 +13,9 @@ const WeaderCard = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         if (data.cod === 200) {
-          console.log(data);
+          //console.log(data);
         }
       })
       .catch((err) => console.log(err));

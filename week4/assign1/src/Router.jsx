@@ -8,12 +8,10 @@ const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/day" element={<WeaderCardPage />}>
-          <Route path=":area" element={<WeaderCard />} />
-        </Route>
-        <Route path="/week" element={<WeaderCardPage />}>
-          <Route path=":area" element={<WeaderCard />} />
+        <Route path="/" element={<Main />}>
+          <Route path=":type" element={<WeaderCardPage />}>
+            <Route path=":area" element={<WeaderCard />} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
