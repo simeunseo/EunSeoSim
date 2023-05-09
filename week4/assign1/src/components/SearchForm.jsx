@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const SearchForm = () => {
   const navigate = useNavigate();
   const { values, errors, submitting, handleChange, handleSubmit } = useForm({
-    initialValues: { type: "week", area: "" },
+    initialValues: { type: "today", area: "" },
     onSubmit: (values) => {
       navigate(`/${values.type}/${values.area}`);
     },
