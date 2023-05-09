@@ -1,14 +1,12 @@
 import { Outlet } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
-import WeaderCard from "../components/WeaderCard";
 
-const Main = () => {
+const WeaderCardPage = () => {
   return (
     <PageLayout>
-      <WeaderCard />
       <Outlet />
     </PageLayout>
   );
 };
 
-export default Main;
+export default WeaderCardPage;
