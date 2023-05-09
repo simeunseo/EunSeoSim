@@ -6,6 +6,8 @@ const WeaderCard = () => {
   const [weaderData, setWeaderData] = useState([
     {
       id: 0,
+      date: "",
+      weather: "",
       temp: 0.0,
       feels_like: 0.0,
       temp_min: 0.0,
@@ -25,11 +27,17 @@ const WeaderCard = () => {
         if (data.cod == 200) {
           // 주간 데이터에는 '200'으로, 일간 데이터에는 200으로 되어있기에 ===이 아닌 ==을 사용
           let tmpWeatherData = [];
+          const today = new Date();
+          const todayMonth = today.getMonth() + 1;
+          const todayDate = today.getDate();
+
           switch (type) {
             case "today":
               setWeaderData([
                 {
                   id: 0,
+                  date: `${todayMonth}/${todayDate}`,
+                  weather: data.weather.main,
                   temp: data.main.temp,
                   feels_like: data.main.feels_like,
                   temp_min: data.main.temp_min,
@@ -43,8 +51,17 @@ const WeaderCard = () => {
                 .filter((i, idx) => {
                   return idx % 8 === 1 ? i : undefined; //5일간의 정보를 받아오기 위한 parsing
                 })
-                .map((data) => {
-                  tmpWeatherData.push(data);
+                .map((data, idx) => {
+                  tmpWeatherData.push({
+                    id: idx,
+                    date: `${todayMonth}/${todayDate + idx}`,
+                    weather: data.weather.main,
+                    temp: data.main.temp,
+                    feels_like: data.main.feels_like,
+                    temp_min: data.main.temp_min,
+                    temp_max: data.main.temp_max,
+                    clouds: data.clouds.all,
+                  });
                 });
               setWeaderData(tmpWeatherData);
               break;
@@ -60,11 +77,17 @@ const WeaderCard = () => {
 
   return (
     <>
-      {/* <p>현재 온도 {weaderData[0].temp}</p>
-      <p>체감 온도 {weaderData[0].feels_like}</p>
-      <p>최저 기온 {weaderData[0].temp_min}</p>
-      <p>최고 기온 {weaderData[0].temp_max}</p>
-      <p>구름량 {weaderData[0].clouds}</p> */}
+      <h1>카드</h1>
+      {weaderData.map((data, idx) => (
+        <li key={idx}>
+          <p>오늘 날짜 {data.date}</p>
+          <p>현재 온도 {data.temp}</p>
+          <p>체감 온도 {data.feels_like}</p>
+          <p>최저 기온 {data.temp_min}</p>
+          <p>최고 기온 {data.temp_max}</p>
+          <p>구름량 {data.clouds}</p>
+        </li>
+      ))}
     </>
   );
 };
