@@ -1,6 +1,8 @@
+import WEATHER_TYPE_IMAGE from "../assets/weatherTypeImage";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+
 const WeaderCard = () => {
   const { type, area } = useParams();
   const [weaderData, setWeaderData] = useState([
@@ -25,6 +27,7 @@ const WeaderCard = () => {
     const todayDate = String(today.getDate()).padStart(2, "0");
     const comparingDate = `${todayYear}-${todayMonth}-${todayDate}`;
     const comparingTime = "12:00:00";
+
     /*
       주간 날씨 데이터에서,
       오늘 날짜의 경우 각 시간대별 예보 중 가장 첫번째 값을,
@@ -56,16 +59,17 @@ const WeaderCard = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.cod == 200) {
-          console.log(data);
           // 주간 데이터에는 '200'으로, 일간 데이터에는 200으로 되어있기에 ===이 아닌 ==을 사용
-
           switch (type) {
             case "today":
               setWeaderData([
                 {
                   id: 0,
                   date: `${todayMonth}/${todayDate}`,
-                  weather: data.weather.main,
+                  weather_description: data.weather[0].description,
+                  weather_img_url: WEATHER_TYPE_IMAGE.filter(
+                    (i) => i.description === data.weather[0].description
+                  )[0].imgURL,
                   temp: data.main.temp,
                   feels_like: data.main.feels_like,
                   temp_min: data.main.temp_min,
@@ -79,7 +83,10 @@ const WeaderCard = () => {
                 tmpWeatherData.push({
                   id: idx,
                   date: `${todayMonth}/${parseInt(todayDate) + idx}`,
-                  weather: data.weather.main,
+                  weather_description: data.weather[0].description,
+                  weather_img_url: WEATHER_TYPE_IMAGE.filter(
+                    (i) => i.description === data.weather[0].description
+                  )[0].imgURL,
                   temp: data.main.temp,
                   feels_like: data.main.feels_like,
                   temp_min: data.main.temp_min,
@@ -104,6 +111,7 @@ const WeaderCard = () => {
       <h1>카드</h1>
       {weaderData.map((data, idx) => (
         <li key={idx}>
+          <img src={data.weather_img_url} alt={data.weather_description}></img>
           <p>오늘 날짜 {data.date}</p>
           <p>현재 온도 {data.temp}</p>
           <p>체감 온도 {data.feels_like}</p>
