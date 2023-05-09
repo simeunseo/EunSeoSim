@@ -1,7 +1,6 @@
-import React from "react";
-
+import WeaderCard from "../components/WeaderCard";
 const Main = () => {
-  return <div>Main</div>;
+  return <WeaderCard />;
 };
 
 export default Main;
