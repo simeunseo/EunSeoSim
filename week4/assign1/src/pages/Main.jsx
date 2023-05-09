@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
 import SearchForm from "../components/SearchForm";
-import WeaderCard from "../components/WeaderCard";
+import WeatherCard from "../components/WeatherCard";
 
 const Main = () => {
   return (

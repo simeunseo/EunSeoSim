@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
 
-const WeaderCardPage = () => {
+const WeatherCardPage = () => {
   return (
     <PageLayout>
       <Outlet />
@@ -9,4 +9,4 @@ const WeaderCardPage = () => {
   );
 };
 
-export default WeaderCardPage;
+export default WeatherCardPage;

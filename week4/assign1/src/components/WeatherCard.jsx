@@ -3,9 +3,9 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 
-const WeaderCard = () => {
+const WeatherCard = () => {
   const { type, area } = useParams();
-  const [weaderData, setWeaderData] = useState([
+  const [weatherData, setWeatherData] = useState([
     {
       id: 0,
       date: "",
@@ -19,7 +19,7 @@ const WeaderCard = () => {
   ]);
 
   const apiType = type === "today" ? "weather" : "forecast";
-  const getWeaderInfo = () => {
+  const getWeatherInfo = () => {
     let tmpWeatherData = [];
     const today = new Date();
     const todayYear = today.getFullYear();
@@ -62,7 +62,7 @@ const WeaderCard = () => {
           // 주간 데이터에는 '200'으로, 일간 데이터에는 200으로 되어있기에 ===이 아닌 ==을 사용
           switch (type) {
             case "today":
-              setWeaderData([
+              setWeatherData([
                 {
                   id: 0,
                   date: `${todayMonth}/${todayDate}`,
@@ -94,7 +94,7 @@ const WeaderCard = () => {
                   clouds: data.clouds.all,
                 });
               });
-              setWeaderData(tmpWeatherData);
+              setWeatherData(tmpWeatherData);
               break;
           }
         }
@@ -103,13 +103,13 @@ const WeaderCard = () => {
   };
 
   useEffect(() => {
-    getWeaderInfo();
+    getWeatherInfo();
   }, [type, area]);
 
   return (
     <>
       <h1>카드</h1>
-      {weaderData.map((data, idx) => (
+      {weatherData.map((data, idx) => (
         <li key={idx}>
           <img src={data.weather_img_url} alt={data.weather_description}></img>
           <p>오늘 날짜 {data.date}</p>
@@ -124,4 +124,4 @@ const WeaderCard = () => {
   );
 };
 
-export default WeaderCard;
+export default WeatherCard;

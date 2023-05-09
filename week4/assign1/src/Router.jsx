@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import Main from "./pages/Main";
-import WeaderCard from "./components/WeaderCard";
-import WeaderCardPage from "./pages/WeaderCardPage";
+import WeatherCard from "./components/WeatherCard";
+import WeatherCardPage from "./pages/WeatherCardPage";
 
 const Router = () => {
   return (
@@ -10,7 +10,7 @@ const Router = () => {
       <Routes>
         <Route path="/" element={<Main />}>
           <Route path=":type">
-            <Route path=":area" element={<WeaderCard />} />
+            <Route path=":area" element={<WeatherCard />} />
           </Route>
         </Route>
       </Routes>
