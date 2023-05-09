@@ -7,7 +7,6 @@ const Main = () => {
   return (
     <PageLayout>
       <SearchForm />
-      <WeaderCard />
       <Outlet />
     </PageLayout>
   );

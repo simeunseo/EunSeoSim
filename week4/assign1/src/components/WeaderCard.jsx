@@ -2,8 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 const WeaderCard = (props) => {
-  const test = useParams();
-  console.log(test);
+  const { type, area } = useParams();
 
   const getWeaderInfo = () => {
     fetch(

@@ -7,7 +7,6 @@ const SearchForm = () => {
     initialValues: { type: "week", area: "" },
     onSubmit: (values) => {
       navigate(`/${values.type}/${values.area}`);
-      console.log(JSON.stringify(values, null, 2));
     },
   });
   return (

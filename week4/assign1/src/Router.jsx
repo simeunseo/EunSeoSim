@@ -9,7 +9,7 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Main />}>
-          <Route path=":type" element={<WeaderCardPage />}>
+          <Route path=":type">
             <Route path=":area" element={<WeaderCard />} />
           </Route>
         </Route>

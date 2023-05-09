@@ -13,7 +13,7 @@ const useForm = ({ initialValues, onSubmit }) => {
     } else if (!/^[a-zA-Z]*$/.test(area)) {
       errors.area = "영문으로 입력해주세요.";
     }
-    if (errors) {
+    if (errors.length > 0) {
       console.log(errors);
     }
     return errors;
