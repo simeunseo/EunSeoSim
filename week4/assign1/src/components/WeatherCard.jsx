@@ -18,9 +18,11 @@ const WeatherCard = () => {
       clouds: 0.0,
     },
   ]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const apiType = type === "today" ? "weather" : "forecast";
-  const getWeatherInfo = () => {
+  const getWeatherInfo = async () => {
     let tmpWeatherData = [];
     const today = new Date();
     const todayYear = today.getFullYear();
@@ -28,7 +30,6 @@ const WeatherCard = () => {
     const todayDate = String(today.getDate()).padStart(2, "0");
     const comparingDate = `${todayYear}-${todayMonth}-${todayDate}`;
     const comparingTime = "12:00:00";
-
     /*
       주간 날씨 데이터에서,
       오늘 날짜의 경우 각 시간대별 예보 중 가장 첫번째 값을,
@@ -52,60 +53,71 @@ const WeatherCard = () => {
       return filteredDataList;
     };
 
-    fetch(
-      `https://api.openweathermap.org/data/2.5/${apiType}?q=${area}&appid=${
-        import.meta.env.VITE_APP_WEATHER
-      }&units=metric`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.cod == 200) {
-          // 주간 데이터에는 '200'으로, 일간 데이터에는 200으로 되어있기에 ===이 아닌 ==을 사용
-          switch (type) {
-            case "today":
-              setWeatherData([
-                {
-                  id: 0,
-                  date: `${todayMonth}/${todayDate}`,
-                  weather_description: data.weather[0].description,
-                  weather_img_url: WEATHER_TYPE_IMAGE.filter(
-                    (i) => i.description === data.weather[0].description
-                  )[0].imgURL,
-                  temp: data.main.temp,
-                  feels_like: data.main.feels_like,
-                  temp_min: data.main.temp_min,
-                  temp_max: data.main.temp_max,
-                  clouds: data.clouds.all,
-                },
-              ]);
-              break;
-            case "week":
-              filterWeatherData(data.list).map((data, idx) => {
-                tmpWeatherData.push({
-                  id: idx,
-                  date: `${todayMonth}/${parseInt(todayDate) + idx}`,
-                  weather_description: data.weather[0].description,
-                  weather_img_url: WEATHER_TYPE_IMAGE.filter(
-                    (i) => i.description === data.weather[0].description
-                  )[0].imgURL,
-                  temp: data.main.temp,
-                  feels_like: data.main.feels_like,
-                  temp_min: data.main.temp_min,
-                  temp_max: data.main.temp_max,
-                  clouds: data.clouds.all,
+    try {
+      // 요청을 시작할 때 loading 상태를 true로 설정한다.
+      setLoading(true);
+      await axios
+        .get(
+          `https://api.openweathermap.org/data/2.5/${apiType}?q=${area}&appid=${
+            import.meta.env.VITE_APP_WEATHER
+          }&units=metric`
+        )
+        .then((res) => res.data)
+        .then((data) => {
+          if (data.cod == 200) {
+            // 주간 데이터에는 '200'으로, 일간 데이터에는 200으로 되어있기에 ===이 아닌 ==을 사용
+            switch (type) {
+              case "today":
+                setWeatherData([
+                  {
+                    id: 0,
+                    date: `${todayMonth}/${todayDate}`,
+                    weather_description: data.weather[0].description,
+                    weather_img_url: WEATHER_TYPE_IMAGE.filter(
+                      (i) => i.description === data.weather[0].description
+                    )[0].imgURL,
+                    temp: data.main.temp,
+                    feels_like: data.main.feels_like,
+                    temp_min: data.main.temp_min,
+                    temp_max: data.main.temp_max,
+                    clouds: data.clouds.all,
+                  },
+                ]);
+                break;
+              case "week":
+                filterWeatherData(data.list).map((data, idx) => {
+                  tmpWeatherData.push({
+                    id: idx,
+                    date: `${todayMonth}/${parseInt(todayDate) + idx}`,
+                    weather_description: data.weather[0].description,
+                    weather_img_url: WEATHER_TYPE_IMAGE.filter(
+                      (i) => i.description === data.weather[0].description
+                    )[0].imgURL,
+                    temp: data.main.temp,
+                    feels_like: data.main.feels_like,
+                    temp_min: data.main.temp_min,
+                    temp_max: data.main.temp_max,
+                    clouds: data.clouds.all,
+                  });
                 });
-              });
-              setWeatherData(tmpWeatherData);
-              break;
+                setWeatherData(tmpWeatherData);
+
+                break;
+            }
           }
-        }
-      })
-      .catch((err) => console.log(err));
+        });
+    } catch (err) {
+      setError(err);
+    }
+    setLoading(false);
   };
 
   useEffect(() => {
     getWeatherInfo();
   }, [type, area]);
+
+  if (loading) return <div>로딩중....</div>;
+  if (error) return <div>문제가 발생했어요! {error}</div>;
 
   return (
     <>
