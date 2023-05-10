@@ -107,7 +107,7 @@ const WeatherCard = () => {
           }
         });
     } catch (err) {
-      setError(err);
+      setError(err.response.data.message);
     }
     setLoading(false);
   };
