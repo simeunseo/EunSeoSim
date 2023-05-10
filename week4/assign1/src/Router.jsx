@@ -1,8 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+import ErrorPage from "./pages/ErrorPage";
 import Main from "./pages/Main";
 import WeatherCard from "./components/WeatherCard";
-import WeatherCardPage from "./pages/WeatherCardPage";
 
 const Router = () => {
   return (
@@ -13,6 +13,7 @@ const Router = () => {
             <Route path=":area" element={<WeatherCard />} />
           </Route>
         </Route>
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
   );
