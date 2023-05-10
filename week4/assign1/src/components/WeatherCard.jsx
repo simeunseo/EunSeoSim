@@ -56,6 +56,8 @@ const WeatherCard = () => {
     try {
       // 요청을 시작할 때 loading 상태를 true로 설정한다.
       setLoading(true);
+      setError("");
+
       await axios
         .get(
           `https://api.openweathermap.org/data/2.5/${apiType}?q=${area}&appid=${
@@ -113,6 +115,7 @@ const WeatherCard = () => {
   };
 
   useEffect(() => {
+    console.log("입력내용 변경");
     getWeatherInfo();
   }, [type, area]);
 
@@ -121,7 +124,9 @@ const WeatherCard = () => {
 
   return (
     <>
-      <h1>카드</h1>
+      <h3>
+        {area}의 {type === "week" ? "주간" : "오늘"} 날씨 정보
+      </h3>
       {weatherData.map((data, idx) => (
         <li key={idx}>
           <img src={data.weather_img_url} alt={data.weather_description}></img>

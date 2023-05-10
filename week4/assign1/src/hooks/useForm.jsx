@@ -14,7 +14,7 @@ const useForm = ({ initialValues, onSubmit }) => {
       errors.area = "영문으로 입력해주세요.";
     }
     if (Object.keys(errors).length > 0) {
-      console.log(errors);
+      console.log(errors.area);
     }
 
     return errors;
@@ -25,10 +25,9 @@ const useForm = ({ initialValues, onSubmit }) => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     setSubmitting(true);
     e.preventDefault();
-    //await new Promise((r) => setTimeout(r, 1));
     setErrors(validate(values));
   };
 
