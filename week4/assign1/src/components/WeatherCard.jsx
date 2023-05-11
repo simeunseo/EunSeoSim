@@ -1,5 +1,6 @@
 import WEATHER_TYPE_IMAGE from "../assets/weatherTypeImage";
 import axios from "axios";
+import skeletonImg from "../assets/skeleton-img.png";
 import { styled } from "styled-components";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -114,7 +115,7 @@ const WeatherCard = () => {
     } catch (err) {
       setError(err.response.data.message);
     }
-    //setLoading(false);
+    setLoading(false);
   };
 
   useEffect(() => {
@@ -127,9 +128,20 @@ const WeatherCard = () => {
   return (
     <St.WeatherCardWrapper>
       {loading ? (
-        <div className="skeleton__cards">
-          <li className="skeleton__cards__card"></li>
-        </div>
+        <>
+          <h3 className="weather-title">로딩중...</h3>
+          <div className="cards">
+            {weatherData.map((data, idx) => (
+              <li className="skeleton__cards_card" key={idx}>
+                <p className="skeleton__date"></p>
+                <img src={skeletonImg} alt={data.weather_description}></img>
+
+                <div className="skeleton__info"></div>
+              </li>
+            ))}
+          </div>
+          <h3>로딩중...</h3>
+        </>
       ) : error ? (
         <>
           <h3 className="weather-error__text">동은아, 에러 체크좀 해주라.</h3>
@@ -190,7 +202,8 @@ const St = {
       color: ${({ theme }) => theme.colors.Red};
     }
 
-    .cards__card {
+    .cards__card,
+    .skeleton__cards_card {
       border: 0.1rem solid ${({ theme }) => theme.colors.Black};
 
       background-color: ${({ theme }) => theme.colors.Grey};
@@ -216,6 +229,28 @@ const St = {
 
       display: flex;
       flex-wrap: wrap;
+    }
+
+    .skeleton__cards_card {
+      border: 0.1rem solid ${({ theme }) => theme.colors.Grey};
+
+      background-color: ${({ theme }) => theme.colors.Grey};
+    }
+
+    .skeleton__date {
+      width: 5rem;
+      height: 2rem;
+
+      margin: auto;
+
+      background-color: ${({ theme }) => theme.colors.White};
+    }
+
+    .skeleton__info {
+      width: 10.5rem;
+      height: 12.5rem;
+
+      background-color: ${({ theme }) => theme.colors.White};
     }
   `,
 };
