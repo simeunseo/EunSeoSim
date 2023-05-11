@@ -25,26 +25,35 @@ const useForm = ({ initialValues, onSubmit }) => {
     setValues({ ...values, [name]: value });
   };
 
+  const handleOptionChange = (e) => {
+    handleChange(e);
+  };
+
   const handleSubmit = (e) => {
     setSubmitting(true);
     e.preventDefault();
     setErrors(validate(values));
   };
 
-  useEffect(() => {
-    if (submitting) {
-      if (Object.keys(errors).length === 0) {
-        onSubmit(values);
+  useEffect(
+    () => {
+      if (submitting) {
+        if (Object.keys(errors).length === 0) {
+          onSubmit(values);
+        }
+        setSubmitting(false);
       }
-      setSubmitting(false);
-    }
-  }, [errors]);
+    },
+    [errors],
+    [values.type]
+  );
 
   return {
     values,
     errors,
     submitting,
     handleChange,
+    handleOptionChange,
     handleSubmit,
   };
 };

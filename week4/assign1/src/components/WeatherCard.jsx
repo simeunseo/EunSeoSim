@@ -51,7 +51,6 @@ const WeatherCard = () => {
             return data.dt_txt.includes(comparingTime);
           }),
       ];
-      console.log(filteredDataList);
       return filteredDataList;
     };
 
@@ -69,7 +68,6 @@ const WeatherCard = () => {
         .then((res) => res.data)
         .then((data) => {
           if (data.cod == 200) {
-            console.log(data);
             // 주간 데이터에는 '200'으로, 일간 데이터에는 200으로 되어있기에 ===이 아닌 ==을 사용
             switch (type) {
               case "today":
@@ -91,7 +89,6 @@ const WeatherCard = () => {
                 break;
               case "week":
                 filterWeatherData(data.list).map((data, idx) => {
-                  console.log(data.weather[0].description);
                   tmpWeatherData.push({
                     id: idx,
                     date: `${todayMonth}/${parseInt(todayDate) + idx}`,
