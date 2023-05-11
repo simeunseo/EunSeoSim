@@ -11,6 +11,9 @@ const fonts = {
   R_Content_1: css`
     font-size: 3rem;
   `,
+  R_Content_2: css`
+    font-size: 1.5rem;
+  `,
 };
 
 const theme = {

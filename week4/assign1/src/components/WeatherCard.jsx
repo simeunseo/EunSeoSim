@@ -51,6 +51,7 @@ const WeatherCard = () => {
             return data.dt_txt.includes(comparingTime);
           }),
       ];
+      //검색 시간에 따라 6일치의 data가 들어오는 일이 있으므로 그럴 경우 마지막 데이터를 제거
       if (filteredDataList.length === 6) {
         filteredDataList.pop();
       }

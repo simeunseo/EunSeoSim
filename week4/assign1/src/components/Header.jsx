@@ -19,7 +19,10 @@ const Header = () => {
           <img src={speechBubbleSImage}></img>
         </div>
       </div>
-      <img src={yeonjinImg}></img>
+      <div>
+        <h3 className="yeonjin-info">기상캐스터 박연진</h3>
+        <img src={yeonjinImg}></img>
+      </div>
     </St.HeaderWrapper>
   );
 };
@@ -40,6 +43,10 @@ const St = {
       width: 20rem;
 
       margin-top: 3rem;
+    }
+
+    .yeonjin-info {
+      ${({ theme }) => theme.fonts.R_Content_2};
     }
 
     .speech-bubble {

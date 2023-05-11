@@ -25,10 +25,6 @@ const useForm = ({ initialValues, onSubmit }) => {
     setValues({ ...values, [name]: value });
   };
 
-  const handleOptionChange = (e) => {
-    handleChange(e);
-  };
-
   const handleSubmit = (e) => {
     setSubmitting(true);
     e.preventDefault();
@@ -56,7 +52,6 @@ const useForm = ({ initialValues, onSubmit }) => {
     errors,
     submitting,
     handleChange,
-    handleOptionChange,
     handleSubmit,
   };
 };
