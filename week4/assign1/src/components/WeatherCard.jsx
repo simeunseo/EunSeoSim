@@ -27,11 +27,8 @@ const WeatherCard = () => {
   const getWeatherInfo = async () => {
     let tmpWeatherData = [];
     const today = new Date();
-    const todayYear = today.getFullYear();
     const todayMonth = String(today.getMonth() + 1).padStart(2, "0");
     const todayDate = String(today.getDate()).padStart(2, "0");
-    const comparingDate = `${todayYear}-${todayMonth}-${todayDate}`;
-    const comparingTime = "12:00:00";
 
     try {
       // 요청을 시작할 때 loading 상태를 true로 설정한다.
@@ -104,7 +101,7 @@ const WeatherCard = () => {
   return (
     <St.WeatherCardWrapper>
       {loading ? (
-        type === "today" ? (
+        type === "today" ? ( //오늘 날씨 스켈레톤
           <>
             <h3 className="weather-title">...왜 이렇게 늦게 와?...</h3>
             <div className="cards">
@@ -120,6 +117,7 @@ const WeatherCard = () => {
             <h3>...보고 싶어 죽는 줄...</h3>
           </>
         ) : (
+          //주간 날씨 스켈레톤
           <>
             <h3 className="weather-title">...왜 이렇게 늦게 와?...</h3>
             <div className="cards">
@@ -135,7 +133,7 @@ const WeatherCard = () => {
             <h3>...보고 싶어 죽는 줄...</h3>
           </>
         )
-      ) : error ? (
+      ) : error ? ( //api 통신 error 처리
         <>
           <h3 className="weather-error__text">
             동은아, 이제부터 네가 에러 체크 좀 해줄래?

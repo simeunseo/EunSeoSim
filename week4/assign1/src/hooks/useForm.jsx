@@ -9,9 +9,9 @@ const useForm = ({ initialValues, onSubmit }) => {
     const errors = {};
 
     if (!area) {
-      errors.area = "지역을 입력해주세요.";
+      errors.area = "지역 입력 안 할거니?";
     } else if (!/^[a-zA-Z]*$/.test(area)) {
-      errors.area = "영문으로 입력해주세요.";
+      errors.area = "영문으로 입력해야지?";
     }
     if (Object.keys(errors).length > 0) {
       console.log(errors.area);

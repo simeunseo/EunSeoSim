@@ -26,6 +26,7 @@ const SearchForm = () => {
           검색
         </button>
       </form>
+      <p className="error-message">{errors.area}</p>
     </St.SearchFormWrapper>
   );
 };
@@ -34,6 +35,10 @@ export default SearchForm;
 
 const St = {
   SearchFormWrapper: styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     form > * {
       padding: 1rem;
     }
@@ -42,6 +47,13 @@ const St = {
       width: 15rem;
 
       margin: 0 1rem;
+    }
+
+    .error-message {
+      margin-top: 1rem;
+
+      color: ${({ theme }) => theme.colors.Red};
+      ${({ theme }) => theme.fonts.R_Content_2};
     }
   `,
 };
