@@ -136,6 +136,10 @@ const reset = css`
   button {
     cursor: pointer;
   }
+
+  * {
+    font-family: "DOSSaemmul";
+  }
 `;
 
 const GlobalStyle = createGlobalStyle`
