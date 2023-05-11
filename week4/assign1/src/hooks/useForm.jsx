@@ -35,18 +35,21 @@ const useForm = ({ initialValues, onSubmit }) => {
     setErrors(validate(values));
   };
 
-  useEffect(
-    () => {
-      if (submitting) {
-        if (Object.keys(errors).length === 0) {
-          onSubmit(values);
-        }
-        setSubmitting(false);
+  useEffect(() => {
+    if (submitting) {
+      if (Object.keys(errors).length === 0) {
+        onSubmit(values);
       }
-    },
-    [errors],
-    [values.type]
-  );
+      setSubmitting(false);
+    }
+  }, [errors]);
+
+  // select box(오늘, 주간)를 바꾸면 자동으로 검색
+  useEffect(() => {
+    if (values.area !== "") {
+      onSubmit(values);
+    }
+  }, [values.type]);
 
   return {
     values,
