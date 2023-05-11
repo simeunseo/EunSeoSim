@@ -32,31 +32,6 @@ const WeatherCard = () => {
     const todayDate = String(today.getDate()).padStart(2, "0");
     const comparingDate = `${todayYear}-${todayMonth}-${todayDate}`;
     const comparingTime = "12:00:00";
-    /*
-      주간 날씨 데이터에서,
-      오늘 날짜의 경우 각 시간대별 예보 중 가장 첫번째 값을,
-      오늘 날짜가 아닌 경우 12:00:00시의 예보 값을 가져와
-      5일치의 데이터를 정리하는 함수
-    */
-    const filterWeatherData = (weatherDataList) => {
-      let filteredDataList = {};
-
-      filteredDataList = [
-        weatherDataList[0],
-        ...weatherDataList
-          .filter((data) => {
-            return !data.dt_txt.includes(comparingDate);
-          })
-          .filter((data) => {
-            return data.dt_txt.includes(comparingTime);
-          }),
-      ];
-      //검색 시간에 따라 6일치의 data가 들어오는 일이 있으므로 그럴 경우 마지막 데이터를 제거
-      if (filteredDataList.length === 6) {
-        filteredDataList.pop();
-      }
-      return filteredDataList;
-    };
 
     try {
       // 요청을 시작할 때 loading 상태를 true로 설정한다.
@@ -92,21 +67,24 @@ const WeatherCard = () => {
                 ]);
                 break;
               case "week":
-                filterWeatherData(data.list).map((data, idx) => {
-                  tmpWeatherData.push({
-                    id: idx,
-                    date: `${todayMonth}/${parseInt(todayDate) + idx}`,
-                    weather_description: data.weather[0].description,
-                    weather_img_url: WEATHER_TYPE_IMAGE.filter(
-                      (i) => i.description === data.weather[0].description
-                    )[0].imgURL,
-                    temp: data.main.temp,
-                    feels_like: data.main.feels_like,
-                    temp_min: data.main.temp_min,
-                    temp_max: data.main.temp_max,
-                    clouds: data.clouds.all,
+                console.log(data);
+                data.list
+                  .filter((i, idx) => [0, 8, 16, 24, 32].indexOf(idx) !== -1)
+                  .map((data, idx) => {
+                    tmpWeatherData.push({
+                      id: idx,
+                      date: `${todayMonth}/${parseInt(todayDate) + idx}`,
+                      weather_description: data.weather[0].description,
+                      weather_img_url: WEATHER_TYPE_IMAGE.filter(
+                        (i) => i.description === data.weather[0].description
+                      )[0].imgURL,
+                      temp: data.main.temp,
+                      feels_like: data.main.feels_like,
+                      temp_min: data.main.temp_min,
+                      temp_max: data.main.temp_max,
+                      clouds: data.clouds.all,
+                    });
                   });
-                });
                 setWeatherData(tmpWeatherData);
 
                 break;
@@ -123,15 +101,12 @@ const WeatherCard = () => {
     getWeatherInfo();
   }, [type, area]);
 
-  //if (loading) return <div>로딩중....</div>;
-  //if (error) return <div>동은아, 에러 체크좀 해주라. {error}</div>;
-
   return (
     <St.WeatherCardWrapper>
       {loading ? (
         type === "today" ? (
           <>
-            <h3 className="weather-title">로딩중...</h3>
+            <h3 className="weather-title">...왜 이렇게 늦게 와?...</h3>
             <div className="cards">
               {weatherData.map((data, idx) => (
                 <li className="skeleton__cards_card" key={idx}>
@@ -142,11 +117,11 @@ const WeatherCard = () => {
                 </li>
               ))}
             </div>
-            <h3>로딩중...</h3>
+            <h3>...보고 싶어 죽는 줄...</h3>
           </>
         ) : (
           <>
-            <h3 className="weather-title">로딩중...</h3>
+            <h3 className="weather-title">...왜 이렇게 늦게 와?...</h3>
             <div className="cards">
               {[0, 1, 2, 3, 4].map((data, idx) => (
                 <li className="skeleton__cards_card" key={idx}>
@@ -157,12 +132,14 @@ const WeatherCard = () => {
                 </li>
               ))}
             </div>
-            <h3>로딩중...</h3>
+            <h3>...보고 싶어 죽는 줄...</h3>
           </>
         )
       ) : error ? (
         <>
-          <h3 className="weather-error__text">동은아, 에러 체크좀 해주라.</h3>
+          <h3 className="weather-error__text">
+            동은아, 이제부터 네가 에러 체크 좀 해줄래?
+          </h3>
           <h3 className="weather-error__description">{error}</h3>
         </>
       ) : (
