@@ -1,4 +1,4 @@
-import React from "react";
+import { styled } from "styled-components";
 import useForm from "../hooks/useForm";
 import { useNavigate } from "react-router-dom";
 const SearchForm = () => {
