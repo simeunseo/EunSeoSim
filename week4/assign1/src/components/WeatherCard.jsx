@@ -50,7 +50,7 @@ const WeatherCard = () => {
             return data.dt_txt.includes(comparingTime);
           }),
       ];
-
+      console.log(filteredDataList);
       return filteredDataList;
     };
 
@@ -68,6 +68,7 @@ const WeatherCard = () => {
         .then((res) => res.data)
         .then((data) => {
           if (data.cod == 200) {
+            console.log(data);
             // 주간 데이터에는 '200'으로, 일간 데이터에는 200으로 되어있기에 ===이 아닌 ==을 사용
             switch (type) {
               case "today":
@@ -89,6 +90,7 @@ const WeatherCard = () => {
                 break;
               case "week":
                 filterWeatherData(data.list).map((data, idx) => {
+                  console.log(data.weather[0].description);
                   tmpWeatherData.push({
                     id: idx,
                     date: `${todayMonth}/${parseInt(todayDate) + idx}`,
@@ -112,39 +114,52 @@ const WeatherCard = () => {
     } catch (err) {
       setError(err.response.data.message);
     }
-    setLoading(false);
+    //setLoading(false);
   };
 
   useEffect(() => {
-    console.log("입력내용 변경");
     getWeatherInfo();
   }, [type, area]);
 
-  if (loading) return <div>로딩중....</div>;
-  if (error) return <div>문제가 발생했어요! {error}</div>;
+  //if (loading) return <div>로딩중....</div>;
+  //if (error) return <div>동은아, 에러 체크좀 해주라. {error}</div>;
 
   return (
     <St.WeatherCardWrapper>
-      <h3 className="weather-title">
-        {area}의 {type === "week" ? "주간" : "오늘"} 날씨 정보 알려드립니다.
-      </h3>
-      <div className="cards">
-        {weatherData.map((data, idx) => (
-          <li className="cards__card" key={idx}>
-            <img
-              src={data.weather_img_url}
-              alt={data.weather_description}
-            ></img>
-            <p>{data.date}</p>
-            <p>현재 {data.temp.toFixed(1)}°C</p>
-            <p>체감 {data.feels_like.toFixed(1)}°C</p>
-            <p>최저 {data.temp_min.toFixed(1)}°C</p>
-            <p>최고 {data.temp_max.toFixed(1)}°C</p>
-            <p>구름량 {data.clouds}%</p>
-          </li>
-        ))}
-      </div>
-      <h3>박연진이었습니다.</h3>
+      {loading ? (
+        <div className="skeleton__cards">
+          <li className="skeleton__cards__card"></li>
+        </div>
+      ) : error ? (
+        <>
+          <h3 className="weather-error__text">동은아, 에러 체크좀 해주라.</h3>
+          <h3 className="weather-error__description">{error}</h3>
+        </>
+      ) : (
+        <>
+          <h3 className="weather-title">
+            {area}의 {type === "week" ? "주간" : "오늘"} 날씨 정보 알려드립니다.
+          </h3>
+          <div className="cards">
+            {weatherData.map((data, idx) => (
+              <li className="cards__card" key={idx}>
+                <p>{data.date}</p>
+                <img
+                  src={data.weather_img_url}
+                  alt={data.weather_description}
+                ></img>
+
+                <p>현재 {data.temp.toFixed(1)}°C</p>
+                <p>체감 {data.feels_like.toFixed(1)}°C</p>
+                <p>최저 {data.temp_min.toFixed(1)}°C</p>
+                <p>최고 {data.temp_max.toFixed(1)}°C</p>
+                <p>구름량 {data.clouds}%</p>
+              </li>
+            ))}
+          </div>
+          <h3>박연진이었습니다.</h3>
+        </>
+      )}
     </St.WeatherCardWrapper>
   );
 };
@@ -161,6 +176,19 @@ const St = {
     align-items: center;
     text-align: center;
     ${({ theme }) => theme.fonts.R_Content_1};
+
+    .weather-error__text {
+      margin-top: 1rem;
+
+      ${({ theme }) => theme.fonts.R_Content_1};
+    }
+
+    .weather-error__description {
+      margin-top: 3rem;
+
+      ${({ theme }) => theme.fonts.R_Content_1};
+      color: ${({ theme }) => theme.colors.Red};
+    }
 
     .cards__card {
       border: 0.1rem solid ${({ theme }) => theme.colors.Black};

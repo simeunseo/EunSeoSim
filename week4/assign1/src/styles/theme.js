@@ -3,6 +3,7 @@ import { css } from "styled-components";
 const colors = {
   Black: "#000000",
   Grey: "#EFEFEF",
+  Red: "#ff0000",
 };
 
 const fonts = {

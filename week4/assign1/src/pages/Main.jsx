@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import PageLayout from "../components/PageLayout";
 import SearchForm from "../components/SearchForm";
-import speechBubbleLImg from "../assets/speech-bubble_l.png";
+import speechBubbleLImg from "../assets/speech-bubble_l.svg";
 import { styled } from "styled-components";
 
 const Main = () => {

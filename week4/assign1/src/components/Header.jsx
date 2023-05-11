@@ -1,5 +1,5 @@
 import dongeunImg from "../assets/dongeun.png";
-import speechBubbleSImage from "../assets/speech-bubble_s.png";
+import speechBubbleSImage from "../assets/speech-bubble_s.svg";
 import styled from "styled-components";
 import yeonjinImg from "../assets/yeonjin.png";
 

@@ -60,6 +60,11 @@ const WEATHER_TYPE_IMAGE = [
     imgURL:
       "https://i.pinimg.com/236x/32/86/d9/3286d9a785a9db5e15f7422a96d757fc.jpg",
   },
+  {
+    description: "light rain",
+    imgURL:
+      "https://i.pinimg.com/564x/4a/87/7f/4a877fdd886e23abf98eda3438ac09ed.jpg",
+  },
 ];
 
 export default WEATHER_TYPE_IMAGE;
