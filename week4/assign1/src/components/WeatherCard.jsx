@@ -128,20 +128,37 @@ const WeatherCard = () => {
   return (
     <St.WeatherCardWrapper>
       {loading ? (
-        <>
-          <h3 className="weather-title">로딩중...</h3>
-          <div className="cards">
-            {weatherData.map((data, idx) => (
-              <li className="skeleton__cards_card" key={idx}>
-                <p className="skeleton__date"></p>
-                <img src={skeletonImg} alt={data.weather_description}></img>
+        type === "today" ? (
+          <>
+            <h3 className="weather-title">로딩중...</h3>
+            <div className="cards">
+              {weatherData.map((data, idx) => (
+                <li className="skeleton__cards_card" key={idx}>
+                  <p className="skeleton__date"></p>
+                  <img src={skeletonImg} alt={data.weather_description}></img>
 
-                <div className="skeleton__info"></div>
-              </li>
-            ))}
-          </div>
-          <h3>로딩중...</h3>
-        </>
+                  <div className="skeleton__info"></div>
+                </li>
+              ))}
+            </div>
+            <h3>로딩중...</h3>
+          </>
+        ) : (
+          <>
+            <h3 className="weather-title">로딩중...</h3>
+            <div className="cards">
+              {[0, 1, 2, 3, 4].map((data, idx) => (
+                <li className="skeleton__cards_card" key={idx}>
+                  <p className="skeleton__date"></p>
+                  <img src={skeletonImg} alt={data.weather_description}></img>
+
+                  <div className="skeleton__info"></div>
+                </li>
+              ))}
+            </div>
+            <h3>로딩중...</h3>
+          </>
+        )
       ) : error ? (
         <>
           <h3 className="weather-error__text">동은아, 에러 체크좀 해주라.</h3>
