@@ -64,7 +64,6 @@ const WeatherCard = () => {
                 ]);
                 break;
               case "week":
-                console.log(data);
                 data.list
                   .filter((i, idx) => [0, 8, 16, 24, 32].indexOf(idx) !== -1)
                   .map((data, idx) => {
@@ -105,14 +104,12 @@ const WeatherCard = () => {
           <>
             <h3 className="weather-title">...왜 이렇게 늦게 와?...</h3>
             <div className="cards">
-              {weatherData.map((data, idx) => (
-                <li className="skeleton__cards_card" key={idx}>
-                  <p className="skeleton__date"></p>
-                  <img src={skeletonImg} alt={data.weather_description}></img>
+              <li className="skeleton__cards_card">
+                <p className="skeleton__date"></p>
+                <img src={skeletonImg} alt="skeleton-image"></img>
 
-                  <div className="skeleton__info"></div>
-                </li>
-              ))}
+                <div className="skeleton__info"></div>
+              </li>
             </div>
             <h3>...보고 싶어 죽는 줄...</h3>
           </>
@@ -182,6 +179,17 @@ const St = {
     text-align: center;
     ${({ theme }) => theme.fonts.R_Content_1};
 
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translate3d(0, 10%, 0);
+      }
+      to {
+        opacity: 1;
+        transform: translateZ(0);
+      }
+    }
+
     .weather-error__text {
       margin-top: 1rem;
 
@@ -198,6 +206,7 @@ const St = {
     .cards__card,
     .skeleton__cards_card {
       border: 0.1rem solid ${({ theme }) => theme.colors.Black};
+      border-radius: 1rem;
 
       background-color: ${({ theme }) => theme.colors.Grey};
 
@@ -207,6 +216,10 @@ const St = {
       padding: 2rem;
 
       ${({ theme }) => theme.fonts.R_Content_1};
+    }
+
+    .cards__card {
+      animation: fadeInUp 0.5s;
     }
 
     img {
@@ -226,8 +239,6 @@ const St = {
 
     .skeleton__cards_card {
       border: 0.1rem solid ${({ theme }) => theme.colors.Grey};
-
-      background-color: ${({ theme }) => theme.colors.Grey};
     }
 
     .skeleton__date {
