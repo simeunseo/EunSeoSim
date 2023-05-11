@@ -13,6 +13,7 @@ const Router = () => {
             <Route path=":area" element={<WeatherCard />} />
           </Route>
         </Route>
+        <Route path=":type/" element={<ErrorPage />} />
         <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </BrowserRouter>
