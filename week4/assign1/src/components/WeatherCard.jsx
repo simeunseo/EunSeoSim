@@ -1,5 +1,6 @@
 import WEATHER_TYPE_IMAGE from "../assets/weatherTypeImage";
 import axios from "axios";
+import { styled } from "styled-components";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
@@ -123,23 +124,70 @@ const WeatherCard = () => {
   if (error) return <div>문제가 발생했어요! {error}</div>;
 
   return (
-    <>
-      <h3>
-        {area}의 {type === "week" ? "주간" : "오늘"} 날씨 정보
+    <St.WeatherCardWrapper>
+      <h3 className="weather-title">
+        {area}의 {type === "week" ? "주간" : "오늘"} 날씨 정보 알려드립니다.
       </h3>
-      {weatherData.map((data, idx) => (
-        <li key={idx}>
-          <img src={data.weather_img_url} alt={data.weather_description}></img>
-          <p>오늘 날짜 {data.date}</p>
-          <p>현재 온도 {data.temp}</p>
-          <p>체감 온도 {data.feels_like}</p>
-          <p>최저 기온 {data.temp_min}</p>
-          <p>최고 기온 {data.temp_max}</p>
-          <p>구름량 {data.clouds}</p>
-        </li>
-      ))}
-    </>
+      <div className="cards">
+        {weatherData.map((data, idx) => (
+          <li className="cards__card" key={idx}>
+            <img
+              src={data.weather_img_url}
+              alt={data.weather_description}
+            ></img>
+            <p>{data.date}</p>
+            <p>현재 {data.temp.toFixed(1)}°C</p>
+            <p>체감 {data.feels_like.toFixed(1)}°C</p>
+            <p>최저 {data.temp_min.toFixed(1)}°C</p>
+            <p>최고 {data.temp_max.toFixed(1)}°C</p>
+            <p>구름량 {data.clouds}%</p>
+          </li>
+        ))}
+      </div>
+      <h3>박연진이었습니다.</h3>
+    </St.WeatherCardWrapper>
   );
 };
 
 export default WeatherCard;
+
+const St = {
+  WeatherCardWrapper: styled.section`
+    margin-top: 3rem;
+    padding: 3rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    ${({ theme }) => theme.fonts.R_Content_1};
+
+    .cards__card {
+      border: 0.1rem solid ${({ theme }) => theme.colors.Black};
+
+      background-color: ${({ theme }) => theme.colors.Grey};
+
+      list-style: none;
+
+      margin: 0 1rem;
+      padding: 2rem;
+
+      ${({ theme }) => theme.fonts.R_Content_1};
+    }
+
+    img {
+      width: 10rem;
+    }
+
+    p {
+      padding: 0.3rem;
+    }
+
+    .cards {
+      margin: 5rem 0;
+
+      display: flex;
+      flex-wrap: wrap;
+    }
+  `,
+};

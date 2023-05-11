@@ -23,12 +23,13 @@ const St = {
     margin-top: 4rem;
 
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     width: 100%;
 
     background-image: url("${speechBubbleLImg}");
     background-repeat: no-repeat;
-    background-size: 96% 90%;
+    background-size: 96% 95%;
   `,
 };
