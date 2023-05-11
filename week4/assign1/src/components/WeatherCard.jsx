@@ -51,6 +51,9 @@ const WeatherCard = () => {
             return data.dt_txt.includes(comparingTime);
           }),
       ];
+      if (filteredDataList.length === 6) {
+        filteredDataList.pop();
+      }
       return filteredDataList;
     };
 
