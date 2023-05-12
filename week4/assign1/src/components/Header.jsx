@@ -20,7 +20,7 @@ const Header = () => {
         </div>
       </div>
       <div>
-        <h3 className="yeonjin-info">기상캐스터 박연진</h3>
+        <h4 className="yeonjin-info">기상캐스터 박연진</h4>
         <img src={yeonjinImg}></img>
       </div>
     </St.HeaderWrapper>

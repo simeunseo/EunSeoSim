@@ -1,14 +1,8 @@
 import { styled } from "styled-components";
 import useForm from "../hooks/useForm";
-import { useNavigate } from "react-router-dom";
+
 const SearchForm = () => {
-  const navigate = useNavigate();
-  const { values, errors, submitting, handleChange, handleSubmit } = useForm({
-    initialValues: { type: "today", area: "" },
-    onSubmit: (values) => {
-      navigate(`/${values.type}/${values.area}`);
-    },
-  });
+  const { values, errors, submitting, handleChange, handleSubmit } = useForm();
   return (
     <St.SearchFormWrapper>
       <form onSubmit={handleSubmit}>

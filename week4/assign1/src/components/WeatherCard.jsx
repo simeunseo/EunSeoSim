@@ -13,6 +13,8 @@ const WeatherCard = () => {
       id: 0,
       date: "",
       weather: "",
+      weather_description: "",
+      weather_img_url: "",
       temp: 0.0,
       feels_like: 0.0,
       temp_min: 0.0,
@@ -24,6 +26,7 @@ const WeatherCard = () => {
   const [error, setError] = useState("");
 
   const apiType = type === "today" ? "weather" : "forecast";
+
   const getWeatherInfo = async () => {
     let tmpWeatherData = [];
     const today = new Date();
@@ -33,6 +36,7 @@ const WeatherCard = () => {
     try {
       // 요청을 시작할 때 loading 상태를 true로 설정한다.
       setLoading(true);
+      // 요청을 다시 시작하므로 error는 초기화한다.
       setError("");
 
       await axios
@@ -46,7 +50,7 @@ const WeatherCard = () => {
           if (data.cod == 200) {
             // 주간 데이터에는 '200'으로, 일간 데이터에는 200으로 되어있기에 ===이 아닌 ==을 사용
             switch (type) {
-              case "today":
+              case "today": // 오늘 데이터일 경우
                 setWeatherData([
                   {
                     id: 0,
@@ -63,9 +67,9 @@ const WeatherCard = () => {
                   },
                 ]);
                 break;
-              case "week":
+              case "week": // 주간 데이터일 경우
                 data.list
-                  .filter((i, idx) => [0, 8, 16, 24, 32].indexOf(idx) !== -1)
+                  .filter((i, idx) => [0, 8, 16, 24, 32].indexOf(idx) !== -1) // 5일치 항목만을 필터링한다
                   .map((data, idx) => {
                     tmpWeatherData.push({
                       id: idx,
@@ -82,7 +86,6 @@ const WeatherCard = () => {
                     });
                   });
                 setWeatherData(tmpWeatherData);
-
                 break;
             }
           }
@@ -90,16 +93,18 @@ const WeatherCard = () => {
     } catch (err) {
       setError(err.response.data.message);
     }
+    // 요청을 모두 끝마쳤으므로 loading 상태를 false로 변경한다.
     setLoading(false);
   };
 
+  // form의 입력값인 type과 area가 바뀔 때마다 날씨 데이터를 새로 가져온다.
   useEffect(() => {
     getWeatherInfo();
   }, [type, area]);
 
   return (
     <St.WeatherCardWrapper>
-      {loading ? (
+      {loading ? ( // loading 상태라면
         type === "today" ? ( //오늘 날씨 스켈레톤
           <>
             <h3 className="weather-title">...왜 이렇게 늦게 와?...</h3>
@@ -130,7 +135,7 @@ const WeatherCard = () => {
             <h3>...보고 싶어 죽는 줄...</h3>
           </>
         )
-      ) : error ? ( //api 통신 error 처리
+      ) : error ? ( // loading 상태가 아니면서 api 통신에 error가 생겼을 경우
         <>
           <h3 className="weather-error__text">
             동은아, 이제부터 네가 에러 체크 좀 해줄래?
@@ -138,6 +143,7 @@ const WeatherCard = () => {
           <h3 className="weather-error__description">{error}</h3>
         </>
       ) : (
+        // api 통신에 error가 없다면
         <>
           <h3 className="weather-title">
             {area}의 {type === "week" ? "주간" : "오늘"} 날씨 정보 알려드립니다.

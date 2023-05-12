@@ -1,10 +1,13 @@
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-const useForm = ({ initialValues, onSubmit }) => {
-  const [values, setValues] = useState(initialValues);
+const useForm = () => {
+  const [values, setValues] = useState({ type: "today", area: "" });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  const navigate = useNavigate();
 
+  // type과 area에 대해 validation 하는 함수
   const validate = ({ type, area }) => {
     const errors = {};
 
@@ -13,6 +16,11 @@ const useForm = ({ initialValues, onSubmit }) => {
     } else if (!/^[a-zA-Z]*$/.test(area)) {
       errors.area = "영문으로 입력해야지?";
     }
+
+    if (!type) {
+      errors.type = "일간이니, 주간이니?";
+    }
+
     if (Object.keys(errors).length > 0) {
       console.log(errors.area);
     }
@@ -34,7 +42,7 @@ const useForm = ({ initialValues, onSubmit }) => {
   useEffect(() => {
     if (submitting) {
       if (Object.keys(errors).length === 0) {
-        onSubmit(values);
+        navigate(`/${values.type}/${values.area}`);
       }
       setSubmitting(false);
     }
@@ -43,7 +51,7 @@ const useForm = ({ initialValues, onSubmit }) => {
   // select box(오늘, 주간)를 바꾸면 자동으로 검색
   useEffect(() => {
     if (values.area !== "") {
-      onSubmit(values);
+      navigate(`/${values.type}/${values.area}`);
     }
   }, [values.type]);
 
