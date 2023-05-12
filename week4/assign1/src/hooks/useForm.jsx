@@ -18,7 +18,7 @@ const useForm = () => {
     }
 
     if (!type) {
-      errors.type = "일간이니, 주간이니?";
+      errors.type = "오늘이니, 주간이니?";
     }
 
     if (Object.keys(errors).length > 0) {
