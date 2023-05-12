@@ -21,10 +21,6 @@ const useForm = () => {
       errors.type = "오늘이니, 주간이니?";
     }
 
-    if (Object.keys(errors).length > 0) {
-      console.log(errors.area);
-    }
-
     return errors;
   };
 
