@@ -137,6 +137,14 @@ const reset = css`
     cursor: pointer;
   }
 
+  @font-face {
+    font-family: "DOSSaemmul";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/DOSSaemmul.woff")
+      format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
   * {
     font-family: "DOSSaemmul";
   }
