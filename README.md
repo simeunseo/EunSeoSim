@@ -18,5 +18,7 @@
 |  | [💡 생각과제](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/6) | |
 | 3주차 | [🌼 짱구는 못말려! 폭풍을 부르는 카드게임 대격돌 💖](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/8) | <a href="https://sopt32-week3-assign1.vercel.app/">🔗</a> |
 |  | [💡 생각과제](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/9) | |
+| 4주차 | [🌪️연진아, 날씨 좀 알려줄래?💧](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/10) | <a href="https://sopt32-week4-assign1.vercel.app/">🔗</a> |
+|  | [💡 생각과제](https://github.com/GO-SOPT-WEB/EunSeoSim/pull/11) | |
 
 </div>
