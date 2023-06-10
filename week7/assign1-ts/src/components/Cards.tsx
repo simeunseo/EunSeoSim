@@ -1,14 +1,25 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 
-import Card from "./Card";
+import Card from "./Card.js";
+import { CardData } from "../types/card.js";
+import React from "react";
 import { getCardArr } from "../utils/getCardArr.js";
-import { levelState } from "../states/level";
-import { scoreState } from "../states/score";
+import { levelState } from "../states/level.js";
+import { scoreState } from "../states/score.js";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useMemo } from "react";
 
-const Cards = (props) => {
+interface CardsProps {
+  compareList: CardData[];
+  setCompareList: React.Dispatch<React.SetStateAction<CardData[]>>;
+  pairedList: CardData[];
+  setPairedList: React.Dispatch<React.SetStateAction<CardData[]>>;
+  cardAllList: number[];
+  setCardAllList: React.Dispatch<React.SetStateAction<number[]>>;
+}
+
+const Cards = (props: CardsProps) => {
   const {
     compareList,
     setCompareList,
@@ -34,7 +45,7 @@ const Cards = (props) => {
     }, 300);
   }, [tempCardAllList, setCardAllList]);
 
-  const clickHandler = (pk, imgId) => {
+  const clickHandler = (pk: number, imgId: number) => {
     let tempCompareList = [];
     let tempPairedList = [];
     switch (compareList.length) {
