@@ -1,6 +1,8 @@
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 
+import { CardData } from "../types/card";
 import ModalPortal from "./ModalPortal";
+import { ReactNode } from "react";
 import SuccessModal from "./SuccessModal";
 import { getCardArr } from "../utils/getCardArr";
 import { levelState } from "../states/level";
@@ -10,11 +12,19 @@ import usdDidMountEffet from "../hooks/useDidMountEffect";
 import { useRef } from "react";
 import { useState } from "react";
 
-const Button = (props) => {
+interface ButtonProps {
+  setCompareList: React.Dispatch<React.SetStateAction<CardData[]>>;
+  setPairedList: React.Dispatch<React.SetStateAction<CardData[]>>;
+  setCardAllList: React.Dispatch<React.SetStateAction<number[]>>;
+  value: string;
+  children: ReactNode;
+}
+
+const Button = (props: ButtonProps) => {
   const { setCompareList, setPairedList, setCardAllList, value } = props;
   const [levelType, setLevelType] = useRecoilState(levelState);
 
-  const [score, setScore] = useRecoilState(scoreState);
+  const setScore = useSetRecoilState(scoreState);
   return props.value === "reset" ? (
     <StyledButton
       onClick={() => {
@@ -32,11 +42,12 @@ const Button = (props) => {
     </StyledButton>
   ) : (
     <StyledButton
-      onClick={(e) => {
+      onClick={(e: React.MouseEvent<HTMLButtonElement, Event>) => {
         setCompareList([]);
         setPairedList([]);
         setScore(0);
-        setLevelType(e.target.value);
+        const target = e.target as HTMLButtonElement;
+        setLevelType(target.value);
       }}
       value={value}
       type="button"
@@ -46,7 +57,13 @@ const Button = (props) => {
   );
 };
 
-const ResetButton = (props) => {
+interface ButtonsProps {
+  setCompareList: React.Dispatch<React.SetStateAction<CardData[]>>;
+  setPairedList: React.Dispatch<React.SetStateAction<CardData[]>>;
+  setCardAllList: React.Dispatch<React.SetStateAction<number[]>>;
+}
+
+const ResetButton = (props: ButtonsProps) => {
   const { setCompareList, setPairedList, setCardAllList } = props;
   return (
     <Button
@@ -60,13 +77,14 @@ const ResetButton = (props) => {
   );
 };
 
-const LevelButtons = (props) => {
-  const { setCompareList, setPairedList } = props;
+const LevelButtons = (props: ButtonsProps) => {
+  const { setCompareList, setPairedList, setCardAllList } = props;
   return (
     <section>
       <Button
         setCompareList={setCompareList}
         setPairedList={setPairedList}
+        setCardAllList={setCardAllList}
         value="easy"
       >
         이지
@@ -74,6 +92,7 @@ const LevelButtons = (props) => {
       <Button
         setCompareList={setCompareList}
         setPairedList={setPairedList}
+        setCardAllList={setCardAllList}
         value="normal"
       >
         노말
@@ -81,6 +100,7 @@ const LevelButtons = (props) => {
       <Button
         setCompareList={setCompareList}
         setPairedList={setPairedList}
+        setCardAllList={setCardAllList}
         value="hard"
       >
         하드
@@ -91,7 +111,7 @@ const LevelButtons = (props) => {
 
 const Score = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const animationScore = useRef();
+  const animationScore = useRef<HTMLSpanElement>(null);
   const levelType = useRecoilValue(levelState);
 
   const goal = () => {
@@ -114,9 +134,11 @@ const Score = () => {
   // 레퍼런스 : https://seokd.tistory.com/8
   usdDidMountEffet(() => {
     // score가 변경되면 animation 이라는 class를 추가함
-    animationScore.current.classList.toggle("animation");
-    setTimeout(() => {
+    animationScore.current &&
       animationScore.current.classList.toggle("animation");
+    setTimeout(() => {
+      animationScore.current &&
+        animationScore.current.classList.toggle("animation");
     }, 500);
 
     console.log(score, goal());
@@ -144,7 +166,7 @@ const Score = () => {
   );
 };
 
-const Buttons = (props) => {
+const Buttons = (props: ButtonsProps) => {
   const { setCompareList, setPairedList, setCardAllList } = props;
 
   return (
@@ -153,6 +175,7 @@ const Buttons = (props) => {
         <LevelButtons
           setCompareList={setCompareList}
           setPairedList={setPairedList}
+          setCardAllList={setCardAllList}
         />
         <RightGroupWrapper>
           <Score />
