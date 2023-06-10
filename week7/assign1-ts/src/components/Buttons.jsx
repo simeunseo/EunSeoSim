@@ -5,16 +5,19 @@ import { ScoreContext } from "../context/context";
 import { ScoreDispatchContext } from "../context/context";
 import SuccessModal from "./SuccessModal";
 import { getCardArr } from "../utils/getCardArr";
+import { levelState } from "../states/level";
 import styled from "styled-components";
 import usdDidMountEffet from "../hooks/useDidMountEffect";
 import { useContext } from "react";
+import { useRecoilState } from "recoil";
 import { useRef } from "react";
 import { useState } from "react";
 
 const Button = (props) => {
   const { setCompareList, setPairedList, setCardAllList, value } = props;
   const levelDispatch = useContext(LevelDispatchContext);
-  const levelType = useContext(LevelContext);
+  //const levelType = useContext(LevelContext);
+  const [levelType, setLevelType] = useRecoilState(levelState);
 
   const scoreDispatch = useContext(ScoreDispatchContext);
 
@@ -39,7 +42,8 @@ const Button = (props) => {
         setCompareList([]);
         setPairedList([]);
         scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
-        levelDispatch({ type: e.target.value });
+        setLevelType(e.target.value);
+        //levelDispatch({ type: e.target.value });
       }}
       value={value}
       type="button"
@@ -95,7 +99,9 @@ const LevelButtons = (props) => {
 const Score = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const animationScore = useRef();
-  const levelType = useContext(LevelContext);
+  //const levelType = useContext(LevelContext);
+  const [levelType, setLevelType] = useRecoilState(levelState);
+
   const goal = () => {
     switch (levelType) {
       case "easy":

@@ -1,10 +1,12 @@
-import { LevelContext, ScoreDispatchContext } from "../context/context";
 import { useContext, useMemo } from "react";
 
 import Card from "./Card";
+import { ScoreDispatchContext } from "../context/context";
 import { getCardArr } from "../utils/getCardArr.js";
+import { levelState } from "../states/level";
 import styled from "styled-components";
 import { useEffect } from "react";
+import { useRecoilValue } from "recoil";
 
 const Cards = (props) => {
   const {
@@ -15,8 +17,8 @@ const Cards = (props) => {
     cardAllList,
     setCardAllList,
   } = props;
-  const levelType = useContext(LevelContext);
 
+  const levelType = useRecoilValue(levelState);
   const scoreDispatch = useContext(ScoreDispatchContext);
 
   //levelType이 변경되지 않는한, cardAllList는 바꾸지 말아줘!!!
