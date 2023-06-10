@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
-const SuccessModal = ({ onClose }) => {
+const SuccessModal = ({
+  onClose,
+}: {
+  onClose: React.MouseEventHandler<HTMLButtonElement>;
+}) => {
   return (
     <CardWrapper>
       <aside className="modal">

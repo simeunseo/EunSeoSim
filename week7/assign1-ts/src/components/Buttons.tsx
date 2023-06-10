@@ -3,7 +3,7 @@ import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { CardData } from "../types/card";
 import ModalPortal from "./ModalPortal";
 import { ReactNode } from "react";
-import SuccessModal from "./SuccessModal";
+import SuccessModal from "./SuccessModal.tsx";
 import { getCardArr } from "../utils/getCardArr";
 import { levelState } from "../states/level";
 import { scoreState } from "../states/score";
