@@ -14,14 +14,12 @@ const Button = (props) => {
   const { setCompareList, setPairedList, setCardAllList, value } = props;
   const [levelType, setLevelType] = useRecoilState(levelState);
 
-  //const scoreDispatch = useContext(ScoreDispatchContext);
   const [score, setScore] = useRecoilState(scoreState);
   return props.value === "reset" ? (
     <StyledButton
       onClick={() => {
         setCompareList([]);
         setPairedList([]);
-        // scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
         setScore(0);
         // 카드가 뒤집어지는 잠깐의 시간동안 새로 달라진 카드가 노출되지 않게 하기 위해, 카드 목록이 바뀔 때까지 약간의 딜레이를 준다.
         setTimeout(() => {
@@ -37,7 +35,6 @@ const Button = (props) => {
       onClick={(e) => {
         setCompareList([]);
         setPairedList([]);
-        //scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
         setScore(0);
         setLevelType(e.target.value);
       }}

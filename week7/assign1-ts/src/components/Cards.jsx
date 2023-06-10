@@ -19,7 +19,6 @@ const Cards = (props) => {
   } = props;
 
   const levelType = useRecoilValue(levelState);
-  //const scoreDispatch = useContext(ScoreDispatchContext);
   const [score, setScore] = useRecoilState(scoreState);
 
   //levelType이 변경되지 않는한, cardAllList는 바꾸지 말아줘!!!
