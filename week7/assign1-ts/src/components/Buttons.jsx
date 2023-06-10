@@ -1,14 +1,12 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 
 import ModalPortal from "./ModalPortal";
-import { ScoreContext } from "../context/context";
-import { ScoreDispatchContext } from "../context/context";
 import SuccessModal from "./SuccessModal";
 import { getCardArr } from "../utils/getCardArr";
 import { levelState } from "../states/level";
+import { scoreState } from "../states/score";
 import styled from "styled-components";
 import usdDidMountEffet from "../hooks/useDidMountEffect";
-import { useContext } from "react";
 import { useRef } from "react";
 import { useState } from "react";
 
@@ -16,14 +14,15 @@ const Button = (props) => {
   const { setCompareList, setPairedList, setCardAllList, value } = props;
   const [levelType, setLevelType] = useRecoilState(levelState);
 
-  const scoreDispatch = useContext(ScoreDispatchContext);
-
+  //const scoreDispatch = useContext(ScoreDispatchContext);
+  const [score, setScore] = useRecoilState(scoreState);
   return props.value === "reset" ? (
     <StyledButton
       onClick={() => {
         setCompareList([]);
         setPairedList([]);
-        scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
+        // scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
+        setScore(0);
         // 카드가 뒤집어지는 잠깐의 시간동안 새로 달라진 카드가 노출되지 않게 하기 위해, 카드 목록이 바뀔 때까지 약간의 딜레이를 준다.
         setTimeout(() => {
           setCardAllList(getCardArr(levelType));
@@ -38,7 +37,8 @@ const Button = (props) => {
       onClick={(e) => {
         setCompareList([]);
         setPairedList([]);
-        scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
+        //scoreDispatch({ type: "INITIALIZE" }); // 점수 초기화
+        setScore(0);
         setLevelType(e.target.value);
       }}
       value={value}
@@ -110,7 +110,8 @@ const Score = () => {
     }
   };
 
-  const score = useContext(ScoreContext);
+  //const score = useContext(ScoreContext);
+  const score = useRecoilValue(scoreState);
 
   // 첫 렌더링 때는 useEffect를 적용하지 않도록 custom hook을 사용함!
   // 레퍼런스 : https://seokd.tistory.com/8
@@ -123,7 +124,6 @@ const Score = () => {
 
     console.log(score, goal());
     if (score === goal()) {
-      console.log("성공");
       setModalOpen(true);
     }
   }, [score]);

@@ -1,12 +1,12 @@
-import { useContext, useMemo } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import Card from "./Card";
-import { ScoreDispatchContext } from "../context/context";
 import { getCardArr } from "../utils/getCardArr.js";
 import { levelState } from "../states/level";
+import { scoreState } from "../states/score";
 import styled from "styled-components";
 import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useMemo } from "react";
 
 const Cards = (props) => {
   const {
@@ -19,7 +19,8 @@ const Cards = (props) => {
   } = props;
 
   const levelType = useRecoilValue(levelState);
-  const scoreDispatch = useContext(ScoreDispatchContext);
+  //const scoreDispatch = useContext(ScoreDispatchContext);
+  const [score, setScore] = useRecoilState(scoreState);
 
   //levelType이 변경되지 않는한, cardAllList는 바꾸지 말아줘!!!
   const tempCardAllList = useMemo(() => {
@@ -53,7 +54,8 @@ const Cards = (props) => {
 
         // 두번째 선택이 첫번째 선택과 같은 카드일 경우
         if (compareList[0].imgId === imgId) {
-          scoreDispatch({ type: "INCREASE" }); // 점수 올리기
+          //scoreDispatch({ type: "INCREASE" }); // 점수 올리기
+          setScore(score + 1);
 
           tempPairedList = [...pairedList];
 

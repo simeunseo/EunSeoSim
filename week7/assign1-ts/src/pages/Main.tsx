@@ -1,7 +1,6 @@
 import Audio from "../components/Audio";
 import BGM from "../assets/bgm.mp3";
 import Cards from "../components/Cards";
-import { GlobalContextProvider } from "../context/context";
 import Header from "../components/Header";
 import { useState } from "react";
 const Main = () => {
@@ -10,7 +9,7 @@ const Main = () => {
   const [cardAllList, setCardAllList] = useState([]); // 화면에 보여지는 카드 리스트(imgId 목록)를 저장
 
   return (
-    <GlobalContextProvider>
+    <>
       <Audio bgm={BGM} />
       <Header
         compareList={compareList}
@@ -27,7 +26,7 @@ const Main = () => {
         cardAllList={cardAllList}
         setCardAllList={setCardAllList}
       />
-    </GlobalContextProvider>
+    </>
   );
 };
 
