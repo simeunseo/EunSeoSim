@@ -1,8 +1,17 @@
+import { CardData } from "../types/card";
 import { allImageArr } from "../utils/getCardArr";
 import cardBackImage from "../assets/pageImages/card-back.png";
 import styled from "styled-components";
 
-const Card = (props) => {
+interface CardProps {
+  imgId: number;
+  clickHandler: (pk: number, imgId: number) => void;
+  compareList: CardData[];
+  pairedList: CardData[];
+  pk: number;
+}
+
+const Card = (props: CardProps) => {
   const { imgId, clickHandler, compareList, pairedList, pk } = props;
 
   // 이 카드가 비교되고 있는 카드인지 여부를 체크하여 boolean 값을 반환
