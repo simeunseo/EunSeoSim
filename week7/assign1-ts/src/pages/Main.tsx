@@ -14,9 +14,7 @@ const Main = () => {
     <>
       <Audio bgm={BGM} />
       <Header
-        compareList={compareList}
         setCompareList={setCompareList}
-        pairedList={pairedList}
         setPairedList={setPairedList}
         setCardAllList={setCardAllList}
       />

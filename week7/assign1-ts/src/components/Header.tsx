@@ -1,16 +1,22 @@
 import Buttons from "./Buttons";
+import { CardData } from "../types/card";
 import headerImage from "../assets/pageImages/header.png";
 import styled from "styled-components";
 
-const Header = (props) => {
-  const { setCompareList, setPairedList, cardAllList, setCardAllList } = props;
+interface HeaderProps {
+  setCompareList: React.Dispatch<React.SetStateAction<CardData[]>>;
+  setPairedList: React.Dispatch<React.SetStateAction<CardData[]>>;
+  setCardAllList: React.Dispatch<React.SetStateAction<number[]>>;
+}
+
+const Header = (props: HeaderProps) => {
+  const { setCompareList, setPairedList, setCardAllList } = props;
   return (
     <>
       <HeaderContainer src={headerImage}></HeaderContainer>
       <Buttons
         setCompareList={setCompareList}
         setPairedList={setPairedList}
-        cardAllList={cardAllList}
         setCardAllList={setCardAllList}
       ></Buttons>
     </>
